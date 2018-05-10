@@ -65,6 +65,8 @@ public class HomeServletController extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
+                request.getRequestDispatcher(url).forward(request, response);
+                
 
             }
 
@@ -101,39 +103,34 @@ public class HomeServletController extends HttpServlet {
         
         conn = fabrica.criaConexao();
         
+        try{
+            
         fabrica.criaInfraestrutura(conn);
-        
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        
-        Usuario usuario = null;
-        
-        usuario = usuarioDAO.findByLoginSenha(conn, "fulano", "123");
-        
-        
-        fabrica.fecharConexao(conn);
-        
-        
-        // If error, forward to /WEB-INF/views/login.jsp
-        if (hasError) {
-
-            request.setAttribute("errorString", errorString);
-
+  
+        errorString = "A base de dados foi criada com sucesso!";
+        request.setAttribute("errorString", errorString);
             // Forward to /WEB-INF/views/login.jsp
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/home.jsp");
-
-            dispatcher.forward(request, response);
-        } // If no error
-        // Store usuario information in Session
-        // And redirect to usuarioInfo page.
-        else {
-            errorString = "A base de dados foi criada com sucesso!";
-            request.setAttribute("errorString", errorString);
-            // Forward to /WEB-INF/views/login.jsp
-            RequestDispatcher dispatcher //
+           RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
             dispatcher.forward(request, response);
-        }
-    }
+        
+            
+        }catch(Exception e){
+            
+         e.printStackTrace();
+         errorString = "A base de dados não foi criada com sucesso!";
+         request.setAttribute("errorString", errorString);
+          // Forward to /WEB-INF/views/login.jsp
+            RequestDispatcher dispatcher //
+                    = this.getServletContext().getRequestDispatcher("home.jsp");
+            dispatcher.forward(request, response);
+          
+        }finally{
+            
+          fabrica.fecharConexao(conn);
 
+        }
+
+    }
+    
 }
