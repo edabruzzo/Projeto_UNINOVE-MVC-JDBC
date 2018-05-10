@@ -58,7 +58,7 @@ public class FiltroJDBC implements Filter{
     }
 
     // Check the target of the request is a servlet?
-    private boolean needJDBC(HttpServletRequest request) {
+    private boolean precisaConexaoJDBC(HttpServletRequest request) {
         System.out.println("JDBC Filtro");
         // 
         // Servlet Url-pattern: /spath/*
@@ -103,7 +103,7 @@ public class FiltroJDBC implements Filter{
         // Avoid open connection for commons request.
         // (For example: image, css, javascript,... )
         // 
-        if (this.needJDBC(req)) {
+        if (this.precisaConexaoJDBC(req)) {
 
             System.out.println("Abrindo conexão no banco de dados para: " + req.getServletPath());
 
@@ -126,10 +126,10 @@ public class FiltroJDBC implements Filter{
                 conn.commit();
             } catch (Exception e) {
                 e.printStackTrace();
-                ConnectionUtils.rollbackQuietly(conn);
+                fabrica.rollbackQuietly(conn);
                 throw new ServletException();
             } finally {
-                ConnectionUtils.closeQuietly(conn);
+                fabrica.closeQuietly(conn);
             }
         } // With commons requests (images, css, html, ..)
         // No need to open the connection.
