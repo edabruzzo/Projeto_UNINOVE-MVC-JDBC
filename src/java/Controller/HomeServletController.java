@@ -23,7 +23,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Emm
- */
+
+
+ESTA SERVLET NÃO PODE PASSAR PELO FILTRO JDBC
+* 
+* https://stackoverflow.com/questions/31318397/webfilter-exclude-url-pattern
+
+
+
+*/
 @WebServlet(name = "HomeServletController", urlPatterns = {"/home"})
 public class HomeServletController extends HttpServlet {
 

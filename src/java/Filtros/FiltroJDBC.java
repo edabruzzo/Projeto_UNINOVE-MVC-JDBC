@@ -84,7 +84,8 @@ public class FiltroJDBC implements Filter{
         Collection<? extends ServletRegistration> values = servletRegistrations.values();
         for (ServletRegistration sr : values) {
             Collection<String> mappings = sr.getMappings();
-            
+//https://stackoverflow.com/questions/31318397/webfilter-exclude-url-pattern
+//NO SERVLET /home EU FAÇO A CRIAÇÃO DA INFRAESTRUTURA
             if (mappings.contains(urlPattern) && !"/home".equals(urlPattern)) {
                 return true;
             }
