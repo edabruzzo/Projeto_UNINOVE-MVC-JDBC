@@ -59,7 +59,7 @@ public class HomeServletController extends HttpServlet {
             String url = "";
 
             try {
-                url = "WEB-INF/view/login.jsp";
+                url = "WEB-INF/view/loginView.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
                 return;
             } catch (Exception ex) {

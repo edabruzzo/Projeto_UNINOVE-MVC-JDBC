@@ -118,7 +118,7 @@ public class FiltroJDBC implements Filter {
         // 
         //NÃO ESTOU MAIS FAZENDO ESTA CHECAGEM, QUE SERÁ FEITA através do URLPATTERN /jdbcDependente/*
 //        if (this.precisaConexaoJDBC(req)) {
-        System.out.println("Abrindo conexão no banco de dados para: " + req.getServletPath());
+        System.out.println("FILTRO-JDBC - Abrindo conexão no banco de dados para: " + req.getServletPath());
 
         Connection conn = null;
         try {
