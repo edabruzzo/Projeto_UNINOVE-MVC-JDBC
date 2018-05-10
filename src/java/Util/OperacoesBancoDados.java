@@ -34,7 +34,7 @@ public class OperacoesBancoDados {
 
         String sql2 = "CREATE TABLE IF NOT EXISTS tb_usuario"
                 + " (matricula INTEGER AUTO_INCREMENT NOT NULL, NOME VARCHAR(255) NOT NULL UNIQUE, "
-                + "departamento VARCHAR(255) NOT NULL, dataAdmissao DATE NOT NULL, "
+                + "departamento VARCHAR(255) NOT NULL, dataAdmissao DATE NOT NULL, senha VARCHAR(10) NOT NULL,"
                 + "PRIMARY KEY (matricula));";
 
         listaSQLs.add(sql2);
