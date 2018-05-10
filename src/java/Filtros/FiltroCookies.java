@@ -51,6 +51,7 @@ public class FiltroCookies implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
+        
  
         Usuario usuarioNaSessao = ConexaoServletController.getUsuarioLogado(session);
         // 
@@ -70,7 +71,10 @@ public class FiltroCookies implements Filter {
             Usuario usuario = null;
             try {
                 try {
+                    if(req.getPathInfo()!="/login"){
                     usuario = usuarioDAO.findByNome(conn, nomeUsuario);
+                    }
+
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(FiltroCookies.class.getName()).log(Level.SEVERE, null, ex);
                 }
