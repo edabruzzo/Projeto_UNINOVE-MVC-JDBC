@@ -24,7 +24,7 @@ public class ConexaoServletController extends HttpServlet {
 
 public static final String ATRIBUTO_CONEXAO = "ATRIBUTO_PARA_CONEXÃO";
  
-    private static final String ATRIBUTO_NOME_USUARIO = "ATRIBUTO_PARA_GUARDAR_NOME_USUÁRIO_NO_COOKIE";
+    private static final String ATRIBUTO_NOME_USUARIO = "ATRIBUTO_PARA_GUARDAR_NOME_USUARIO_NO_COOKIE";
     
     private static final long serialVersionUID = 8391436750459991867L;
  
@@ -35,7 +35,7 @@ public static final String ATRIBUTO_CONEXAO = "ATRIBUTO_PARA_CONEXÃO";
     }
  
     // Get the Connection object has been guardard in attribute of the request.
-    public static Connection getGuardaConexao(ServletRequest request) {
+    public static Connection getConexaoGuardada(ServletRequest request) {
         Connection conn = (Connection) request.getAttribute(ATRIBUTO_CONEXAO);
         return conn;
     }

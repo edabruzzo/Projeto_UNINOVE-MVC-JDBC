@@ -25,12 +25,15 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Emm
 
+* 
+* REFERÊNCIA PARA ESTE PROJETO : https://o7planning.org/en/10285/create-a-simple-java-web-application-using-servlet-jsp-and-jdbc#a812142
+* 
+* 
 Esta classe garante que uma conexão com o banco de dados só será aberta se 
 realmente for necessário. Mas, para tanto, terei que refatorar os DAOs para que
 a conexão venha do filtro e não da fábrica de conexão OperacoesBanco
 
 * AINDA NÃO SEI COMO VOU USAR ESTE FILTRO
-* 
 * JDBCFilter with url-pattern = /* means that all requests of users have go through this filter.
 JDBCFilter will check the request to ensure that it only opens JDBC connection  for the necessary request, eg for Servlet, avoid opening JDBC connection to common requests like image, css, js, html 
 

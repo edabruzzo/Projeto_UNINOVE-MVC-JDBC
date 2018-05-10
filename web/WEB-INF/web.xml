@@ -20,4 +20,34 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+
+<welcome-file-list>
+ 
+   <welcome-file>home</welcome-file>
+    
+   <welcome-file>index.html</welcome-file>
+    
+ </welcome-file-list>
+
+<!--  JDBCFilter & CookieFilter have the same  url-pattern =/*, 
+    you must be configured to ensure that JDBCFilter  is  executed first. 
+    Therefore, you need to declare the order in web.xml 
+    (There is no way to declare the order by Annotation). 
+
+ REFERÊNCIA : https://o7planning.org/en/10285/create-a-simple-java-web-application-using-servlet-jsp-and-jdbc#a812142
+    -->
+
+
+<filter-mapping>
+    <filter-name>FiltroJDBC</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+ 
+<filter-mapping>
+    <filter-name>FiltroCookies</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+
 </web-app>

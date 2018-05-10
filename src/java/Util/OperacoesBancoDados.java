@@ -22,7 +22,7 @@ public class OperacoesBancoDados {
 
     private String URL;
 
-    public void criaInfraestrutura() throws SQLException, ClassNotFoundException {
+    public void criaInfraestrutura(Connection conn) throws SQLException, ClassNotFoundException {
 
 
         ArrayList<String> listaSQLs = new ArrayList();
@@ -51,7 +51,7 @@ public class OperacoesBancoDados {
                 + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01', 'fulano', '123')";
         listaSQLs.add(sql4);
 
-        executaBatchUpdate(listaSQLs);
+        executaBatchUpdate(conn, listaSQLs);
 
     }
 
@@ -127,9 +127,9 @@ public class OperacoesBancoDados {
         }
     }
 
-    public ResultSet executaQuerieResultSet(String sql) throws ClassNotFoundException, SQLException {
+    public ResultSet executaQuerieResultSet(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
+        conn = criaConexao();
         Statement stmt = conn.createStatement();
 
         ResultSet rs = null;
@@ -154,9 +154,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieSemResultado(String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieSemResultado(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
+        conn = criaConexao();
         Statement stmt = conn.createStatement();
 
         try {
@@ -178,9 +178,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieUpdate(String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieUpdate(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
+        conn = criaConexao();
         Statement stmt = conn.createStatement();
         conn.setAutoCommit(false);
 
@@ -213,9 +213,9 @@ public class OperacoesBancoDados {
         this.URL = URL;
     }
 
-    public void executaBatchUpdate(ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
+    public void executaBatchUpdate(Connection conn, ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
 
-        Connection conn = criaConexao();
+        conn = criaConexao();
         Statement stmt = conn.createStatement();
         conn.setAutoCommit(false);
         for (int i = 0; i < listaSQLs.size(); i++) {

@@ -7,6 +7,7 @@ package DAO;
 
 import Model.Usuario;
 import Util.OperacoesBancoDados;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class UsuarioDAO {
     
 OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
-       public void criarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException {
+       public void criarUsuario(Connection conn, Usuario usuario) throws ClassNotFoundException, SQLException {
 
        
           String sql = "INSERT INTO tb_usuario (NOME, DEPARTAMENTO, dataAdmissao, "
@@ -36,7 +37,7 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
                 + "')";
 
 
-            fabrica.executaQuerieUpdate(sql);
+            fabrica.executaQuerieUpdate(conn, sql);
 
         }
 
@@ -108,15 +109,15 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     
     
 
-    public Usuario findByLogin(String login) throws ClassNotFoundException, SQLException {
+    public Usuario findByNome(Connection conn, String nome) throws ClassNotFoundException, SQLException {
     
     
-        String sql = "SELECT * FROM tb_usuario WHERE login LIKE '"
-                + login + "'";
+        String sql = "SELECT * FROM tb_usuario WHERE nome LIKE '"
+                + nome + "'";
         
         ResultSet rs = null;
         try {
-            rs = fabrica.executaQuerieResultSet(sql);
+            rs = fabrica.executaQuerieResultSet(conn, sql);
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
