@@ -10,6 +10,7 @@ import Util.OperacoesBancoDados;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,6 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
     
        public void editarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException {
-
 
         String sql1 = "UPDATE tb_usuario "
                 + "SET LOGIN = '" + usuario.getLogin()
@@ -125,6 +125,35 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
         
         return usuario;
 
+    }
+    
+    
+    
+    
+        public List<Usuario> findByDepartamento(String departamento) throws ClassNotFoundException, SQLException {
+   
+        String sql = "SELECT * FROM tb_usuario WHERE departamento = '"+departamento
+                + "';";
+        
+        
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
+        
+        return this.extrairListaUsuariosResultSet(rs);
+    
+    }
+
+    
+        public List<Usuario> findByDataAdmissao(Date dataInicial, Date dataFinal) throws ClassNotFoundException, SQLException {
+   
+        String sql = "SELECT * FROM tb_usuario WHERE dataAdmissao between '"+dataInicial
+                + " AND '"+dataFinal
+                + "';";
+        
+        
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
+        
+        return this.extrairListaUsuariosResultSet(rs);
+    
     }
 
 
