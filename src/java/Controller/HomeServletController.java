@@ -23,128 +23,107 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Emm
-
-
-ESTA SERVLET NÃO PODE PASSAR PELO FILTRO JDBC
-* 
-* https://stackoverflow.com/questions/31318397/webfilter-exclude-url-pattern
-
-
-
-*/
-@WebServlet(name = "HomeServletController", urlPatterns = {"/home"}, loadOnStartup = 1)
+ *
+ *
+ * ESTA SERVLET NÃO PODE PASSAR PELO FILTRO JDBC
+ *
+ * https://stackoverflow.com/questions/31318397/webfilter-exclude-url-pattern
+ *
+ *
+ *
+ */
+@WebServlet(name = "HomeServletController", urlPatterns = {"/*"}, loadOnStartup = 1)
 public class HomeServletController extends HttpServlet {
 
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
-
     private static final long serialVersionUID = 1L;
-    
+
     UsuarioDAO usuarioDAO = new UsuarioDAO();
- 
+
     public HomeServletController() {
         super();
     }
- 
+
     // Show Login page.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
-        // Forward to /WEB-INF/views/loginView.jsp
-        // (Users can not access directly into JSP pages placed in WEB-INF)
-        RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
- 
-        dispatcher.forward(request, response);
- 
+
+        String userPath = request.getServletPath();
+
+        // if category page is requested
+        if (!userPath.equals("/jdbcDependente/*")) {
+            // TODO: Implement category request
+            // use RequestDispatcher to forward request internally
+            String url = "home.jsp";
+
+            try {
+
+                this.criarBaseDados(request, response);
+                url = "WEB-INF/view/login.jsp";
+                request.getRequestDispatcher(url).forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+
+            }
+
+        }
+
     }
- 
+
     // When the usuario enters usuarioName & password, and click Submit.
     // This method will be executed.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        try {
+            criarBaseDados(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void criarBaseDados(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+
         boolean hasError = false;
+        
         String errorString = null;
         
-        try {
-            fabrica.criaBaseDados();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        fabrica.criaBaseDados();
         
         Connection conn = null;
-        try {
-            conn = fabrica.criaConexao();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        conn = fabrica.criaConexao();
+        
+        fabrica.criaInfraestrutura(conn);
         
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = null;
-        try {
-            usuario = usuarioDAO.findByLoginSenha(conn, "fulano", "123");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(NullPointerException npe){
-
-            if (usuario.getLogin() == null) {
-                Connection connection = null;
-                try {
-                    conn = fabrica.criaConexao();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    fabrica.criaInfraestrutura(conn);
-                } catch (SQLException ex) {
-                    Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-                }finally{
-                    
-                    if (connection != null){
-                        
-                        fabrica.fecharConexao(conn);
-                    }
-                }
-            
-        }else {
-            
-            hasError = true;
-            errorString = "A base de dados já foi criada!";
-            
-            }
         
-        }finally{
-            
-            if (conn!=null)   try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-         
+        Usuario usuario = null;
+        
+        usuario = usuarioDAO.findByLoginSenha(conn, "fulano", "123");
+        
+        
+        fabrica.fecharConexao(conn);
+        
+        
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
-        
+
             request.setAttribute("errorString", errorString);
-           
+
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
- 
+                    = this.getServletContext().getRequestDispatcher("/home.jsp");
+
             dispatcher.forward(request, response);
-        }
-        // If no error
+        } // If no error
         // Store usuario information in Session
         // And redirect to usuarioInfo page.
         else {
@@ -156,5 +135,5 @@ public class HomeServletController extends HttpServlet {
             dispatcher.forward(request, response);
         }
     }
- 
+
 }

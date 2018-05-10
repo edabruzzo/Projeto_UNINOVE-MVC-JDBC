@@ -8,13 +8,14 @@
    pageEncoding="UTF-8"%>
     
 <div style="padding: 5px;">
- 
-   <a href="${pageContext.request.contextPath}/">Home</a>
+    <h3>
+   <a href="${pageContext.request.contextPath}/home">Home</a>
    |
-   <a href="${pageContext.request.contextPath}/productList">Lista Contratos</a>
+   <a href="${pageContext.request.contextPath}/jdbcDependente/contratos">Lista Contratos</a>
    |
-   <a href="${pageContext.request.contextPath}/userInfo">Informações do Usuário</a>
+   <a href="${pageContext.request.contextPath}/jdbcDependente/usuariosInfo">Informações de Usuários</a>
    |
-   <a href="${pageContext.request.contextPath}/login">Login</a>
-    
+   <a href="${pageContext.request.contextPath}//jdbcDependente/login">Login</a>
+    </h3>
 </div>  
+   

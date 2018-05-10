@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <title>Home Page</title>
     </head>
-    <body>
+    <body style="background-color: black; color:white">
 
         <jsp:include page="/template/_header.jsp"></jsp:include>
         <jsp:include page="/template/_menu.jsp"></jsp:include>
@@ -32,24 +32,25 @@
 
 
             <form method="POST" action="${pageContext.request.contextPath}/login">
-            <text>
-
-            <p style="color:red">Se este for seu primeiro acesso :</p>
-
-            Você terá que criar toda a infraestrutura do sistema.
-
-            Certifique-se de haver uma instância do servidor MySQL de banco de dados
-
-            rodando em sua máquina. Para isso, abra o gerenciador de tarefas do seu 
-
-            sistema operacional ou verifique na linha de comando se o serviço MySQL 
-
-            foi iniciado. 
-
-            Inicie o serviço MYSQL e, após, clique no campo abaixo: 
-            </text>
             
-            <a href="${pageContext.request.contextPath}/">CRIAR INFRAESTRUTURA</a>
+                <text>
+
+                <h3>    <p style="color:red">Se este for seu primeiro acesso :</p></h3>
+ 
+                Você terá que criar toda a infraestrutura do sistema.
+
+                Certifique-se de haver uma instância do servidor MySQL de banco de dados
+
+                rodando em sua máquina. Para isso, abra o gerenciador de tarefas do seu 
+
+                sistema operacional ou verifique na linha de comando se o serviço MySQL 
+
+                foi iniciado. 
+
+                Inicie o serviço MYSQL e, após, clique no campo abaixo: 
+               
+                </text>
+            <h2><a href="${pageContext.request.contextPath}/home">CRIAR INFRAESTRUTURA</a></h2>
 
         </form>
 

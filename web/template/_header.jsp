@@ -8,7 +8,7 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<div style="background: #E0E0E0; height: 55px; padding: 5px;">
+<div style="background: black; color: white; height: 55px; padding: 5px;">
   <div style="float: left">
      <h1>SISTEMA CONTROLE CONTRATOS</h1>
   </div>
@@ -26,7 +26,7 @@
          out.print( "<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
       %></b>
    <br/>
-     Search <input name="search">
+     
  
   </div>
  
