@@ -84,7 +84,8 @@ public class FiltroJDBC implements Filter{
         Collection<? extends ServletRegistration> values = servletRegistrations.values();
         for (ServletRegistration sr : values) {
             Collection<String> mappings = sr.getMappings();
-            if (mappings.contains(urlPattern)) {
+            
+            if (mappings.contains(urlPattern) && !"/home".equals(urlPattern)) {
                 return true;
             }
         }

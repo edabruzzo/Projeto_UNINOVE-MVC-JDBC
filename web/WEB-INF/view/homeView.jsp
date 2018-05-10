@@ -5,32 +5,57 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-     <meta charset="UTF-8">
-     <title>Home Page</title>
-  </head>
-  <body>
- 
-     <jsp:include page="_header.jsp"></jsp:include>
-     <jsp:include page="_menu.jsp"></jsp:include>
-    
-      <h3>Home Page</h3>
-      
-      <br>PROJETO DESENVOLVIDO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS.<br>
-      <b>Propósito do projeto:</b>
-      <ul>
-         <li>Login</li>
-         <li>Guardar informações do usuário em cookies</li>
-         <li>Gerenciamento de contratos</li>
-         <li>Criação de Contrato</li>
-         <li>Atualização do Contrato</li>
-         <li>Remoção do Contrato</li>
-      </ul>
- 
-     <jsp:include page="_footer.jsp"></jsp:include>
- 
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+    </head>
+    <body>
+
+        <jsp:include page="_header.jsp"></jsp:include>
+        <jsp:include page="_menu.jsp"></jsp:include>
+
+            <h3>Home Page</h3>
+
+            <br>PROJETO DESENVOLVIDO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS.<br>
+            <b>Propósito do projeto:</b>
+            <ul>
+                <li>Login</li>
+                <li>Guardar informações do usuário em cookies</li>
+                <li>Gerenciamento de contratos</li>
+                <li>Criação de Contrato</li>
+                <li>Atualização do Contrato</li>
+                <li>Remoção do Contrato</li>
+            </ul>
+
+
+            <form method="POST" action="${pageContext.request.contextPath}/login">
+            <text>
+
+            <p style="color:red">Se este for seu primeiro acesso :</p>
+
+            Você terá que criar toda a infraestrutura do sistema.
+
+            Certifique-se de haver uma instância do servidor MySQL de banco de dados
+
+            rodando em sua máquina. Para isso, abra o gerenciador de tarefas do seu 
+
+            sistema operacional ou verifique na linha de comando se o serviço MySQL 
+
+            foi iniciado. 
+
+            Inicie o serviço MYSQL e, após, clique no campo abaixo: 
+            </text>
+            <input type="submit" value= "Submit" />
+
+            <a href="${pageContext.request.contextPath}/">CRIAR INFRAESTRUTURA</a>
+
+        </form>
+
+
+        <jsp:include page="_footer.jsp"></jsp:include>
+
+    </body>
 </html>

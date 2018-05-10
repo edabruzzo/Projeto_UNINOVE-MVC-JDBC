@@ -38,9 +38,9 @@ diretamente nas páginas. Outra forma de fazer a mesma coisa é por meio da decl
 
 <welcome-file-list>
  
-   <welcome-file>home</welcome-file>
+   <welcome-file>homeView.jsp</welcome-file>
     
-   <welcome-file>index.html</welcome-file>
+   <welcome-file>index.jsp</welcome-file>
     
  </welcome-file-list>
 
