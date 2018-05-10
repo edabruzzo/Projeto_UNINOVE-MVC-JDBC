@@ -13,8 +13,8 @@
       <title>Login</title>
    </head>
    <body>
-      <jsp:include page="_header.jsp"></jsp:include>
-      <jsp:include page="_menu.jsp"></jsp:include>
+      <jsp:include page="/template/_header.jsp"></jsp:include>
+      <jsp:include page="/template/_menu.jsp"></jsp:include>
  
       <h3>Login Page</h3>
       <p style="color: red;">${errorString}</p>
@@ -47,6 +47,6 @@
           <p style="color:blue;">LOGIN: fulano</p>
            <p style="color:blue;">PASSWORD: 123</p>
            
-      <jsp:include page="_footer.jsp"></jsp:include>
+      <jsp:include page="/template/_footer.jsp"></jsp:include>
    </body>
 </html>

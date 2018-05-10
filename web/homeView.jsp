@@ -14,8 +14,8 @@
     </head>
     <body>
 
-        <jsp:include page="_header.jsp"></jsp:include>
-        <jsp:include page="_menu.jsp"></jsp:include>
+        <jsp:include page="/template/_header.jsp"></jsp:include>
+        <jsp:include page="/template/_menu.jsp"></jsp:include>
 
             <h3>Home Page</h3>
 
@@ -48,14 +48,13 @@
 
             Inicie o serviço MYSQL e, após, clique no campo abaixo: 
             </text>
-            <input type="submit" value= "Submit" />
-
+            
             <a href="${pageContext.request.contextPath}/">CRIAR INFRAESTRUTURA</a>
 
         </form>
 
 
-        <jsp:include page="_footer.jsp"></jsp:include>
+        <jsp:include page="/template/_footer.jsp"></jsp:include>
 
     </body>
 </html>

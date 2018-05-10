@@ -16,8 +16,8 @@
    </head>
    <body>
     
-      <jsp:include page="_header.jsp"></jsp:include>
-      <jsp:include page="_menu.jsp"></jsp:include>
+      <jsp:include page="/template/_header.jsp"></jsp:include>
+      <jsp:include page="/template/_menu.jsp"></jsp:include>
        
       <h3>Criar Contrato</h3>
        
@@ -46,7 +46,7 @@
          </table>
       </form>
        
-      <jsp:include page="_footer.jsp"></jsp:include>
+      <jsp:include page="/template/_footer.jsp"></jsp:include>
        
    </body>
 </html>
