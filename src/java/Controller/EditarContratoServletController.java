@@ -5,6 +5,8 @@
  */
 package Controller;
 
+
+
 import DAO.ContratoDAO;
 import Model.Contrato;
 import java.io.IOException;
@@ -12,7 +14,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,36 +26,70 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emm
  */
- 
-@WebServlet(urlPatterns = { "/criarContrato" })
-public class CriarContratoServletController extends HttpServlet {
-    
+
+@WebServlet(urlPatterns = { "/editarContrato" })
+public class EditarContratoServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+
     
     ContratoDAO contratoDAO = new ContratoDAO();
- 
-    public CriarContratoServletController() {
+    
+    
+    public EditarContratoServletController() {
         super();
     }
  
-    // Show product creation page.
+    // Show contrato edit page.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Connection conn = ConexaoServletController.getConexaoGuardada(request);
+        
+        //NECESSÁRIO FAZER O PARSER DO PARÂMETRO
+        String codigoStrg = (String) request.getParameter("codigo");
+        int codigo = 0;
+        codigo = Integer.parseInt(codigoStrg);
+ 
+        Contrato contrato = null;
+ 
+        String errorString = null;
+ 
+        try {
+            contrato = contratoDAO.findByCodigo(conn, codigo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarContratoServletController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        // If no error.
+        // The contrato does not exist to edit.
+        // Redirect to contratos page.
+        if (errorString != null && contrato == null) {
+            response.sendRedirect(request.getServletPath() + "/contratos");
+            return;
+        }
+ 
+        // Store errorString in request attribute, before forward to views.
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("contrato", contrato);
  
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/criarContratoView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/editarContratoView.jsp");
         dispatcher.forward(request, response);
+ 
     }
  
-    // When the user enters the product information, and click Submit.
-    // This method will be called.
+    // After the user modifies the contrato information, and click Submit.
+    // This method will be executed.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        Connection conn = ConexaoServletController.getConexaoGuardada(request);
+        
+       Connection conn = ConexaoServletController.getConexaoGuardada(request);
  
         String code = (String) request.getParameter("codigo");
         String objetoContrato = (String) request.getParameter("objeto");
@@ -77,25 +112,19 @@ public class CriarContratoServletController extends HttpServlet {
             
         }
 
-Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, ativo, contratado);
- 
+    Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, ativo, contratado);
+  
         String errorString = null;
-        
-        if (code == null) {
-            errorString = "Contrato com código inválido!";
-        }
  
-        if (errorString == null) {
-            try {
-                contratoDAO.criarContrato(conn, contrato);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                errorString = e.getMessage();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CriarContratoServletController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            contratoDAO.editarContrato(conn, contrato);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarContratoServletController.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("contrato", contrato);
@@ -103,11 +132,11 @@ Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, 
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/criarContratoView.jsp");
+                    .getRequestDispatcher("/WEB-INF/views/editarContratoView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.
-        // Redirect to the product listing page.
+        // Redirect to the contrato listing page.
         else {
             response.sendRedirect(request.getContextPath() + "/contratos");
         }
