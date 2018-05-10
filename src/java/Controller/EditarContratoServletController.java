@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emm
  */
 
-@WebServlet(urlPatterns = { "jdbcDependente/editarContrato" }, loadOnStartup = 0)
+@WebServlet(urlPatterns = { "/jdbcDependente/editarContrato" }, loadOnStartup = 0)
 public class EditarContratoServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "jdbcDependente/usuariosInfo" }, loadOnStartup = 0)
+@WebServlet(urlPatterns = { "/jdbcDependente/usuariosInfo" }, loadOnStartup = 0)
 public class UsuariosServletController extends HttpServlet {
 
 
