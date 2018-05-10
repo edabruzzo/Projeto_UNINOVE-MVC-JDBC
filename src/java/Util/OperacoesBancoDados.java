@@ -33,8 +33,9 @@ public class OperacoesBancoDados {
         listaSQLs.add(sql1);
 
         String sql2 = "CREATE TABLE IF NOT EXISTS tb_usuario"
-                + " (matricula INTEGER AUTO_INCREMENT NOT NULL, NOME VARCHAR(255) NOT NULL UNIQUE, "
-                + "departamento VARCHAR(255) NOT NULL, dataAdmissao DATE NOT NULL, senha VARCHAR(10) NOT NULL,"
+                + " (matricula INTEGER AUTO_INCREMENT NOT NULL, nome VARCHAR(255) NOT NULL UNIQUE, "
+                + "departamento VARCHAR(255) NOT NULL, dataAdmissao DATE NOT NULL, "
+                + " login VARCHAR(10) NOT NULL, password  VARCHAR(10) NOT NULL,  "
                 + "PRIMARY KEY (matricula));";
 
         listaSQLs.add(sql2);
@@ -45,8 +46,9 @@ public class OperacoesBancoDados {
 
         listaSQLs.add(sql3);
 
-        String sql4 = "INSERT INTO tb_usuario (NOME, DEPARTAMENTO, dataAdmissao) "
-                + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01')";
+        String sql4 = "INSERT INTO tb_usuario (nome, departamento, dataAdmissao, "
+                + "login, password) "
+                + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01', 'fulano', '123')";
         listaSQLs.add(sql4);
 
         executaBatchUpdate(listaSQLs);
@@ -138,7 +140,6 @@ public class OperacoesBancoDados {
             System.out.println("Executada com sucesso!");
 
         } catch (SQLException ex) {
-
             System.out.println("Query não executada!");
             Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

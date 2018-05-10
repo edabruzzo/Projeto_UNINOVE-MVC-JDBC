@@ -17,15 +17,9 @@ public class Usuario {
     private String departamento;
     private String nome;
     private Date dataAdmissao;
-    private String senha;
+    private String login;
+    private String password;
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
     public Integer getMatricula() {
         return matricula;
@@ -57,6 +51,22 @@ public class Usuario {
 
     public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
