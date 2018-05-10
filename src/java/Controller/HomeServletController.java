@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  *
  */
-@WebServlet(name = "HomeServletController", urlPatterns = {"/*"}, loadOnStartup = 1)
+@WebServlet(name = "HomeServletController", urlPatterns = {"/home"}, loadOnStartup = 1)
 public class HomeServletController extends HttpServlet {
 
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
@@ -56,15 +56,19 @@ public class HomeServletController extends HttpServlet {
         if (!userPath.equals("/jdbcDependente/*")) {
             // TODO: Implement category request
             // use RequestDispatcher to forward request internally
-            String url = "home.jsp";
+            String url = "";
 
             try {
-
-                this.criarBaseDados(request, response);
                 url = "WEB-INF/view/login.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
+                return;
             } catch (Exception ex) {
+                
+                url = "home.jsp";
                 ex.printStackTrace();
+                String errorString = "Não foi possível redirecionar para a página de login,"
+                        + " Tente criar a infraestrutura!";
+                request.setAttribute("errorString", errorString);
                 request.getRequestDispatcher(url).forward(request, response);
 
             }
@@ -127,7 +131,7 @@ public class HomeServletController extends HttpServlet {
                 request.setAttribute("errorString", errorString);
                 // Forward to /WEB-INF/views/login.jsp
                 RequestDispatcher dispatcher //
-                        = this.getServletContext().getRequestDispatcher("/home.jsp");
+                        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
                 dispatcher.forward(request, response);
 
             } finally {
