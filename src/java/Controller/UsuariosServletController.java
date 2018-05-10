@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/usuarioInfoView" })
+@WebServlet(urlPatterns = { "/usuariosInfo" })
 public class UsuariosServletController extends HttpServlet {
 
 
@@ -52,7 +52,7 @@ public class UsuariosServletController extends HttpServlet {
         // If the usuario has logged in, then forward to the page
         // /WEB-INF/views/usuarioInfoView.jsp
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/usuarioInfoView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/usuariosInfoView.jsp");
         dispatcher.forward(request, response);
  
     }

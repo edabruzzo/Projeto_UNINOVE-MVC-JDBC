@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/loginView" })
+@WebServlet(urlPatterns = { "/login" })
 public class LoginServletController extends HttpServlet{
     
 

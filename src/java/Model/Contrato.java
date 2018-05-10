@@ -16,6 +16,19 @@ public class Contrato {
     private Double orcamentoComprometido;
     private boolean ativo;
     private String contratado;
+
+    public Contrato(Integer codigo, String objetoContrato, Double orcamentoComprometido,
+            boolean ativo, String contratado) {
+        this.codigo = codigo;
+        this.objetoContrato = objetoContrato;
+        this.orcamentoComprometido = orcamentoComprometido;
+        this.ativo = ativo;
+        this.contratado = contratado;
+    }
+
+    public Contrato() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

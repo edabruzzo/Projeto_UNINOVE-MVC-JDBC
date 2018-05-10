@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
  
-@WebServlet(urlPatterns = { "/contratosView" })
+@WebServlet(urlPatterns = { "/contratos" })
 public class ContratosServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -46,9 +46,9 @@ public class ContratosServletController extends HttpServlet {
         Connection conn = ConexaoServletController.getConexaoGuardada(request);
  
         String errorString = null;
-        List<Contrato> list = null;
+        List<Contrato> listaContratos = null;
         try {
-            list = contratoDAO.consultaContratos(conn);
+            listaContratos = contratoDAO.consultaContratos(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -57,7 +57,7 @@ public class ContratosServletController extends HttpServlet {
         }
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("contratos", list);
+        request.setAttribute("contratos", listaContratos);
          
         // Forward to /WEB-INF/views/contratosView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
