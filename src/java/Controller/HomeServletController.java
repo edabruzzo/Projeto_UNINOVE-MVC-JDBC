@@ -66,7 +66,6 @@ public class HomeServletController extends HttpServlet {
             } catch (Exception ex) {
                 ex.printStackTrace();
                 request.getRequestDispatcher(url).forward(request, response);
-                
 
             }
 
@@ -93,44 +92,50 @@ public class HomeServletController extends HttpServlet {
     public void criarBaseDados(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
 
-        boolean hasError = false;
-        
         String errorString = null;
-        
-        fabrica.criaBaseDados();
-        
         Connection conn = null;
-        
-        conn = fabrica.criaConexao();
-        
-        try{
-            
-        fabrica.criaInfraestrutura(conn);
-  
-        errorString = "A base de dados foi criada com sucesso!";
-        request.setAttribute("errorString", errorString);
+
+        try {
+
+            conn = fabrica.criaConexao();
+            usuarioDAO.findUsuario(conn, 1);
+            errorString = "A base de dados não foi criada com sucesso!";
+            request.setAttribute("errorString", errorString);
             // Forward to /WEB-INF/views/login.jsp
-           RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-            dispatcher.forward(request, response);
-        
-            
-        }catch(Exception e){
-            
-         e.printStackTrace();
-         errorString = "A base de dados não foi criada com sucesso!";
-         request.setAttribute("errorString", errorString);
-          // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("home.jsp");
+                    = this.getServletContext().getRequestDispatcher("WEB-INF/view/loginView.jsp");
             dispatcher.forward(request, response);
-          
-        }finally{
-            
-          fabrica.fecharConexao(conn);
+
+        } catch (Exception e) {
+            e.getMessage();
+
+            fabrica.criaBaseDados();
+
+            try {
+
+                fabrica.criaInfraestrutura(conn);
+                errorString = "A infraestrutura foi criada com sucesso!";
+                request.setAttribute("errorString", errorString);
+                // Forward to /WEB-INF/views/login.jsp
+                RequestDispatcher dispatcher //
+                        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                dispatcher.forward(request, response);
+
+            }catch (IOException | ClassNotFoundException | SQLException | ServletException multiException) {
+                e.printStackTrace();
+                errorString = "A infraestrutura não foi criada!";
+                request.setAttribute("errorString", errorString);
+                // Forward to /WEB-INF/views/login.jsp
+                RequestDispatcher dispatcher //
+                        = this.getServletContext().getRequestDispatcher("/home.jsp");
+                dispatcher.forward(request, response);
+
+            } finally {
+
+                fabrica.fecharConexao(conn);
+
+            }
 
         }
-
     }
-    
 }
