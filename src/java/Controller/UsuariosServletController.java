@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/usuariosInfo" })
+@WebServlet(urlPatterns = { "jdbcDependente/usuariosInfo" }, loadOnStartup = 0)
 public class UsuariosServletController extends HttpServlet {
 
 
@@ -43,7 +43,7 @@ public class UsuariosServletController extends HttpServlet {
         // Not logged in
         if (usuarioLogado == null) {
             // Redirect to login page.
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/jdbcDependente/login");
             return;
         }
         // Store info to the request attribute before forwarding.

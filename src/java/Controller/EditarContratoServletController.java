@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emm
  */
 
-@WebServlet(urlPatterns = { "/editarContrato" })
+@WebServlet(urlPatterns = { "jdbcDependente/editarContrato" }, loadOnStartup = 0)
 public class EditarContratoServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -69,7 +69,7 @@ public class EditarContratoServletController extends HttpServlet {
         // The contrato does not exist to edit.
         // Redirect to contratos page.
         if (errorString != null && contrato == null) {
-            response.sendRedirect(request.getServletPath() + "/contratos");
+            response.sendRedirect(request.getServletPath() + "/jdbcDependente/contratos");
             return;
         }
  
@@ -138,7 +138,7 @@ public class EditarContratoServletController extends HttpServlet {
         // If everything nice.
         // Redirect to the contrato listing page.
         else {
-            response.sendRedirect(request.getContextPath() + "/contratos");
+            response.sendRedirect(request.getContextPath() + "/jdbcDependente/contratos");
         }
     }
  

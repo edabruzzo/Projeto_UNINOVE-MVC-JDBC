@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/login" })
+@WebServlet(urlPatterns = { "/jdbcDependente/login" }, loadOnStartup = 0)
 public class LoginServletController extends HttpServlet{
     
 
@@ -128,7 +128,7 @@ public class LoginServletController extends HttpServlet{
             }
  
             // Redirect to usuarioInfo page.
-            response.sendRedirect(request.getContextPath() + "/usuarioInfo");
+            response.sendRedirect(request.getContextPath() + "/jdbcDependente/usuariosInfo");
         }
     }
  

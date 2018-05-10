@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/deletarContrato" })
+@WebServlet(urlPatterns = { "/jdbcDependente/deletarContrato" }, loadOnStartup = 0)
 public class DeletarContratoServletController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class DeletarContratoServletController extends HttpServlet {
         // If everything nice.
         // Redirect to the product listing page.        
         else {
-            response.sendRedirect(request.getContextPath() + "/contratos");
+            response.sendRedirect(request.getContextPath() + "/jdbcDependente/contratos");
         }
  
     }

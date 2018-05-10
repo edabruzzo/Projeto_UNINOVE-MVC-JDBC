@@ -42,12 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 //OPTANDO POR FAZER O FILTRO VIA web.xml
 @WebFilter(filterName = "FiltroJDBC",
-            urlPatterns = {"/contratos",
-                           "/criarContrato",
-                           "/editarContrato",
-                           "/deletarContrato",
-                           "/login",
-                           "/usuariosInfo"})
+            urlPatterns = {"/jdbcDependente/*"})
 public class FiltroJDBC implements Filter {
 
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
@@ -67,7 +62,7 @@ public class FiltroJDBC implements Filter {
     
     ESTOU ASSUMINDO QUE A VERIFICAÇÃO QUE O´MÉTODO ABAIXO FAZ PARA DIZER SE UM 
     SERVLET PRECISA OU NÃO DE UMA CONEXÃO JDBC SERÁ BASEADA NA MINHA ESCOLHA DE
-    QUE TODOS OS SERVLETS QUE NECESSITAM DE CONEXÃO FICARÃO NA PASTA VIEW
+    QUE TODOS OS SERVLETS QUE NECESSITAM DE CONEXÃO TERÃO O URLPATTERN /jdbcDependente/*
     
     
     // Check the target of the request is a servlet?
@@ -121,7 +116,7 @@ public class FiltroJDBC implements Filter {
         // Avoid open connection for commons request.
         // (For example: image, css, javascript,... )
         // 
-        //NÃO ESTOU MAIS FAZENDO ESTA CHECAGEM, QUE SERÁ FEITA NO web.xml
+        //NÃO ESTOU MAIS FAZENDO ESTA CHECAGEM, QUE SERÁ FEITA através do URLPATTERN /jdbcDependente/*
 //        if (this.precisaConexaoJDBC(req)) {
         System.out.println("Abrindo conexão no banco de dados para: " + req.getServletPath());
 

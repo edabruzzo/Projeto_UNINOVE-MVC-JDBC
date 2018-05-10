@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
  
-@WebServlet(urlPatterns = { "/contratos" })
+@WebServlet(urlPatterns = { "/jdbcDependente/contratos" }, loadOnStartup = 0)
 public class ContratosServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

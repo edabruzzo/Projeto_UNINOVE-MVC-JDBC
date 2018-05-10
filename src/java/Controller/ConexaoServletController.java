@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(name = "ConexaoServletController", urlPatterns = {"/*"})
+@WebServlet(name = "ConexaoServletController", urlPatterns = {"/jdbcDependente/*"}, loadOnStartup = 0)
 public class ConexaoServletController extends HttpServlet {
 
 public static final String ATRIBUTO_CONEXAO = "ATRIBUTO_PARA_CONEXÃO";

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emm
  */
  
-@WebServlet(urlPatterns = { "/criarContrato" })
+@WebServlet(urlPatterns = { "/jdbcDependente/criarContrato" }, loadOnStartup = 0)
 public class CriarContratoServletController extends HttpServlet {
     
 
@@ -109,7 +109,7 @@ Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, 
         // If everything nice.
         // Redirect to the product listing page.
         else {
-            response.sendRedirect(request.getContextPath() + "/contratos");
+            response.sendRedirect(request.getContextPath() + "/jdbcDependente/contratos");
         }
     }
  

@@ -32,7 +32,7 @@ ESTA SERVLET NÃO PODE PASSAR PELO FILTRO JDBC
 
 
 */
-@WebServlet(name = "HomeServletController", urlPatterns = {"/home"})
+@WebServlet(name = "HomeServletController", urlPatterns = {"/home"}, loadOnStartup = 1)
 public class HomeServletController extends HttpServlet {
 
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
