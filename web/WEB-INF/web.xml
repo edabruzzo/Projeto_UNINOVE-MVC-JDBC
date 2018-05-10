@@ -5,15 +5,25 @@
             30
         </session-timeout>
     </session-config>
-    <jsp-config>
+   
+         <!-- Some JSP pages will be used to embed into other JSP page at Runtime, 
+            through the use of:   
+            <jsp:include page="_header.jsp"></jsp:include>
+            <jsp:include page="_menu.jsp"></jsp:include>
+            <jsp:include page="_footer.jsp"></jsp:include> 
+
+diretamente nas páginas. Outra forma de fazer a mesma coisa é por meio da declaração abaixo:
+    
+<jsp-config>
         <jsp-property-group>
             <description>header and footer settings</description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
+                    
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
-    </jsp-config>
+    </jsp-config>-->
     <resource-ref>
         <res-ref-name>jdbc/projetoUninove</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
