@@ -242,4 +242,33 @@ public class OperacoesBancoDados {
         }
     }
 
+    
+    
+    public static void closeQuietly(Connection conn) {
+        try {
+            if (conn != null){
+
+                conn.close();
+
+            }else return;
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            return;
+        }
+    }
+ 
+    public static void rollbackQuietly(Connection conn) {
+        try {
+            if(conn != null){
+                conn.rollback();
+            }return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+    
+    
+    
 }
