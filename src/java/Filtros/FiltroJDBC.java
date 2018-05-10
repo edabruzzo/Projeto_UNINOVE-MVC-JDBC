@@ -9,13 +9,13 @@ import Controller.ConexaoServletController;
 import Util.OperacoesBancoDados;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Collection;
-import java.util.Map;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
@@ -24,29 +24,34 @@ import javax.servlet.http.HttpServletRequest;
 /**
  *
  * @author Emm
+ *
+ *
+ * REFERÊNCIA PARA ESTE PROJETO :
+ * https://o7planning.org/en/10285/create-a-simple-java-web-application-using-servlet-jsp-and-jdbc#a812142
+ *
+ *
+ * Esta classe garante que uma conexão com o banco de dados só será aberta se
+ * realmente for necessário. Mas, para tanto, terei que refatorar os DAOs para
+ * que a conexão venha do filtro e não da fábrica de conexão OperacoesBanco
+ *
+ * AINDA NÃO SEI COMO VOU USAR ESTE FILTRO JDBCFilter with url-pattern = /*
+ * means that all requests of users have go through this filter. JDBCFilter will
+ * check the request to ensure that it only opens JDBC connection for the
+ * necessary request, eg for Servlet, avoid opening JDBC connection to common
+ * requests like image, css, js, html  *
+ */
+//OPTANDO POR FAZER O FILTRO VIA web.xml
+@WebFilter(filterName = "FiltroJDBC",
+            urlPatterns = {"/contratos",
+                           "/criarContrato",
+                           "/editarContrato",
+                           "/deletarContrato",
+                           "/login",
+                           "/usuariosInfo"})
+public class FiltroJDBC implements Filter {
 
-* 
-* REFERÊNCIA PARA ESTE PROJETO : https://o7planning.org/en/10285/create-a-simple-java-web-application-using-servlet-jsp-and-jdbc#a812142
-* 
-* 
-Esta classe garante que uma conexão com o banco de dados só será aberta se 
-realmente for necessário. Mas, para tanto, terei que refatorar os DAOs para que
-a conexão venha do filtro e não da fábrica de conexão OperacoesBanco
-
-* AINDA NÃO SEI COMO VOU USAR ESTE FILTRO
-* JDBCFilter with url-pattern = /* means that all requests of users have go through this filter.
-JDBCFilter will check the request to ensure that it only opens JDBC connection  for the necessary request, eg for Servlet, avoid opening JDBC connection to common requests like image, css, js, html 
-
-*/
-
-
-@WebFilter(filterName = "FiltroJDBC", urlPatterns = { "/*" })
-public class FiltroJDBC implements Filter{
-
-    
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
-    
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
 
@@ -57,9 +62,17 @@ public class FiltroJDBC implements Filter{
 
     }
 
+    /*
+    
+    
+    ESTOU ASSUMINDO QUE A VERIFICAÇÃO QUE O´MÉTODO ABAIXO FAZ PARA DIZER SE UM 
+    SERVLET PRECISA OU NÃO DE UMA CONEXÃO JDBC SERÁ BASEADA NA MINHA ESCOLHA DE
+    QUE TODOS OS SERVLETS QUE NECESSITAM DE CONEXÃO FICARÃO NA PASTA VIEW
+    
+    
     // Check the target of the request is a servlet?
     private boolean precisaConexaoJDBC(HttpServletRequest request) {
-        System.out.println("JDBC Filtro");
+        System.out.println("Iniciando Filtro JDBC");
         // 
         // Servlet Url-pattern: /spath/*
         // 
@@ -77,7 +90,7 @@ public class FiltroJDBC implements Filter{
 
         // Key: servletName.
         // Value: ServletRegistration
-        Map<String, ? extends ServletRegistration> servletRegistrations = request.getServletContext()
+ /*       Map<String, ? extends ServletRegistration> servletRegistrations = request.getServletContext()
                 .getServletRegistrations();
 
         // Collection of all servlet in your Webapp.
@@ -85,13 +98,16 @@ public class FiltroJDBC implements Filter{
         for (ServletRegistration sr : values) {
             Collection<String> mappings = sr.getMappings();
 //https://stackoverflow.com/questions/31318397/webfilter-exclude-url-pattern
-//NO SERVLET /home EU FAÇO A CRIAÇÃO DA INFRAESTRUTURA
+//NO SERVLET /home EU FAÇO A CRIAÇÃO DA INFRAESTRUTURA 
             if (mappings.contains(urlPattern) && !"/home".equals(urlPattern)) {
-                return true;
+         if (pathInfo.contains("view") && !urlPattern.contains("/home")){
+            return true;
             }
-        }
+        
         return false;
     }
+    
+     */
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -105,42 +121,38 @@ public class FiltroJDBC implements Filter{
         // Avoid open connection for commons request.
         // (For example: image, css, javascript,... )
         // 
-        if (this.precisaConexaoJDBC(req)) {
+        //NÃO ESTOU MAIS FAZENDO ESTA CHECAGEM, QUE SERÁ FEITA NO web.xml
+//        if (this.precisaConexaoJDBC(req)) {
+        System.out.println("Abrindo conexão no banco de dados para: " + req.getServletPath());
 
-            System.out.println("Abrindo conexão no banco de dados para: " + req.getServletPath());
+        Connection conn = null;
+        try {
+            // Create a Connection.
+            conn = this.fabrica.criaConexao();
+            // Set outo commit to false.
+            conn.setAutoCommit(false);
 
-            Connection conn = null;
-            try {
-                // Create a Connection.
-                conn = this.fabrica.criaConexao();
-                // Set outo commit to false.
-                conn.setAutoCommit(false);
+            // Store Connection object in attribute of request.
+            //Estranha esta forma de usar o que uma classe oferece, sem ter que instanciar objeto
+            ConexaoServletController.guardarConexao(request, conn);
+            // Allow request to go forward
+            // (Go to the next filter or target)
+            chain.doFilter(request, response);
 
-                // Store Connection object in attribute of request.
-                //Estranha esta forma de usar o que uma classe oferece, sem ter que instanciar objeto
-                ConexaoServletController.guardarConexao(request, conn);
-
-                // Allow request to go forward
-                // (Go to the next filter or target)
-                chain.doFilter(request, response);
-
-                // Invoke the commit() method to complete the transaction with the DB.
-                conn.commit();
+            // Invoke the commit() method to complete the transaction with the DB.
+            /*    conn.commit();
             } catch (Exception e) {
                 e.printStackTrace();
                 fabrica.rollbackQuietly(conn);
                 throw new ServletException();
-            } finally {
-                fabrica.closeQuietly(conn);
+            */} catch (ClassNotFoundException ex) {
+            Logger.getLogger(FiltroJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FiltroJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+                fabrica.fecharConexao(conn);
             }
         } // With commons requests (images, css, html, ..)
         // No need to open the connection.
-        else {
-            // Allow request to go forward
-            // (Go to the next filter or target)
-            chain.doFilter(request, response);
-        }
-
+        
     }
-
-}

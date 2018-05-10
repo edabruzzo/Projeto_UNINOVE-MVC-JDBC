@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/deleteProduct" })
+@WebServlet(urlPatterns = { "/deletarContrato" })
 public class DeletarContratoServletController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;

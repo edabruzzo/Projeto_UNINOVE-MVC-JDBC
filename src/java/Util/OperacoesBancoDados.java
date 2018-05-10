@@ -268,7 +268,36 @@ public class OperacoesBancoDados {
             return;
         }
     }
-    
-    
-    
+
+    public void deletaBanco() throws ClassNotFoundException, SQLException{
+        
+        
+         Class.forName("com.mysql.jdbc.Driver");
+        String USER = "root";
+        String PASSWORD = "root";
+        this.setURL("jdbc:mysql://localhost:3306/");
+
+        Connection conn = null;
+        Statement stmt = null;
+        //STEP 3: Open a connection
+        System.out.println("Conectando ao servidor com a seguinte URL : " + this.URL);
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.createStatement();
+            conn.setAutoCommit(false);
+            stmt.execute("DROP DATABASE IF EXISTS controleFinanceiroUNINOVE");
+            conn.commit();
+        } catch (SQLException ex) {
+            conn.rollback();
+            Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            fecharConexao(conn);
+            stmt.close();
+
+        }
+
+
+    }
 }
