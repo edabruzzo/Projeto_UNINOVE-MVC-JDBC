@@ -50,7 +50,7 @@
                 Inicie o serviço MYSQL e, após, clique no campo abaixo: 
                
                 </text>
-            <h2><a href="${pageContext.request.contextPath}/home">CRIAR INFRAESTRUTURA</a></h2>
+            <h2><a href="${pageContext.request.contextPath}/criaInfra">CRIAR INFRAESTRUTURA</a></h2>
 
         </form>
 

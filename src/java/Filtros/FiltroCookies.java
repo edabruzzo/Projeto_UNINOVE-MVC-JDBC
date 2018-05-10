@@ -73,6 +73,9 @@ public class FiltroCookies implements Filter {
                 try {
                     if(req.getPathInfo()!="/login"){
                     usuario = usuarioDAO.findByNome(conn, nomeUsuario);
+                    }else{
+                        chain.doFilter(request, response);
+        
                     }
 
                 } catch (ClassNotFoundException ex) {

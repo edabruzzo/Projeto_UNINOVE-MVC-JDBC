@@ -35,11 +35,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "HomeServletController", urlPatterns = {"/home"}, loadOnStartup = 1)
 public class HomeServletController extends HttpServlet {
 
-    OperacoesBancoDados fabrica = new OperacoesBancoDados();
-
     private static final long serialVersionUID = 1L;
 
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     public HomeServletController() {
         super();
@@ -77,69 +74,4 @@ public class HomeServletController extends HttpServlet {
 
     }
 
-    // When the usuario enters usuarioName & password, and click Submit.
-    // This method will be executed.
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        try {
-            criarBaseDados(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeServletController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public void criarBaseDados(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-
-        String errorString = null;
-        Connection conn = null;
-
-        try {
-
-            conn = fabrica.criaConexao();
-            usuarioDAO.findUsuario(conn, 1);
-            errorString = "A base de dados não foi criada com sucesso!";
-            request.setAttribute("errorString", errorString);
-            // Forward to /WEB-INF/views/login.jsp
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("WEB-INF/view/loginView.jsp");
-            dispatcher.forward(request, response);
-
-        } catch (Exception e) {
-            e.getMessage();
-
-            fabrica.criaBaseDados();
-
-            try {
-
-                fabrica.criaInfraestrutura(conn);
-                errorString = "A infraestrutura foi criada com sucesso!";
-                request.setAttribute("errorString", errorString);
-                // Forward to /WEB-INF/views/login.jsp
-                RequestDispatcher dispatcher //
-                        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-                dispatcher.forward(request, response);
-
-            }catch (IOException | ClassNotFoundException | SQLException | ServletException multiException) {
-                e.printStackTrace();
-                errorString = "A infraestrutura não foi criada!";
-                request.setAttribute("errorString", errorString);
-                // Forward to /WEB-INF/views/login.jsp
-                RequestDispatcher dispatcher //
-                        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-                dispatcher.forward(request, response);
-
-            } finally {
-
-                fabrica.fecharConexao(conn);
-
-            }
-
-        }
-    }
 }
