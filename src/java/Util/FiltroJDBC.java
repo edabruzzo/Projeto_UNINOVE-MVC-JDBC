@@ -14,8 +14,6 @@ import Controller.ConexaoServletController;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  
@@ -23,14 +21,13 @@ import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
  
  
-@WebFilter(filterName = "jdbcFilter", urlPatterns = { "/jdbcDependente/*" })
+@WebFilter(filterName = "FiltroJDBC", urlPatterns = { "/jdbcDependente/*" })
 public class FiltroJDBC implements Filter {
     
     
@@ -64,7 +61,8 @@ public class FiltroJDBC implements Filter {
         // (For example: image, css, javascript,... )
         // 
         
-            System.out.println("Open Connection for: " + req.getServletPath());
+            System.out.println("FiltroJDBC - Abrindo conexão banco de dados para "
+                    + "o seguinte servlet: " + req.getServletPath());
  
             Connection conn = null;
             try {
@@ -87,7 +85,7 @@ public class FiltroJDBC implements Filter {
             Logger.getLogger(FiltroJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
                 
-                System.out.println("FILTRO-JDBC ] - Fechando conexão com banco de dados");
+                System.out.println("FILTRO-JDBC - Fechando conexão com banco de dados");
                 fabrica.fecharConexao(conn);
             }
         }

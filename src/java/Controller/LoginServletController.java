@@ -37,14 +37,14 @@ public class LoginServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/*
+
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access directly into JSP pages placed in WEB-INF)
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
 
         dispatcher.forward(request, response);
-*/
+
     }
 
     // When the usuario enters usuarioName & password, and click Submit.
@@ -70,13 +70,14 @@ public class LoginServletController extends HttpServlet {
             errorString = "Login e senha obrigatórios!";
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
-/*            RequestDispatcher dispatcher //
+
+            RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
             dispatcher.forward(request, response);
-*/
 
-                HttpSession session = request.getSession();
-                response.sendRedirect(request.getContextPath() + "/jdbcDependente/login");
+
+                //HttpSession session = request.getSession();
+                //response.sendRedirect(request.getContextPath() + "/jdbcDependente/login");
 
 
         } else {
@@ -109,7 +110,8 @@ public class LoginServletController extends HttpServlet {
                 HttpSession session = request.getSession();
                 ConexaoServletController.guardarUsuarioLogado(session, usuario);
                 // Redirect to usuarioInfo page.
-                response.sendRedirect(request.getContextPath() + "/jdbcDependente/usuariosInfo");
+                 RequestDispatcher dispatcher //
+                 = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuariosInfoView.jsp");
 
             }
 

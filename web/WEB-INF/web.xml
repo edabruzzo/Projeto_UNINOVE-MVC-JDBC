@@ -37,6 +37,14 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    <filter>
+        <filter-name>FiltroJDBC</filter-name>
+        <filter-class>Util.FiltroJDBC</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FiltroJDBC</filter-name>
+        <url-pattern>/jdbcDependente/*</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30

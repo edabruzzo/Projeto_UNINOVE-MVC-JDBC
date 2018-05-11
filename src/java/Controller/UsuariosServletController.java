@@ -6,8 +6,14 @@
 package Controller;
 
 
+import DAO.UsuarioDAO;
 import Model.Usuario;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
  
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,9 +31,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet(urlPatterns = { "/jdbcDependente/usuariosInfo" }, loadOnStartup = 0)
 public class UsuariosServletController extends HttpServlet {
 
-
+    
     private static final long serialVersionUID = 1L;
  
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    
     public UsuariosServletController() {
         super();
     }
@@ -37,18 +45,23 @@ public class UsuariosServletController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
  
-        // Check User has logged on
-        Usuario usuarioLogado = ConexaoServletController.getUsuarioLogado(session);
- 
-        // Not logged in
-        if (usuarioLogado == null) {
-            // Redirect to login page.
-            response.sendRedirect(request.getContextPath() + "/jdbcDependente/login");
-            return;
+        
+    Connection conn = ConexaoServletController.getConexaoGuardada(request);
+       
+        String errorString = null;
+        List<Usuario> listaUsuarios = null;
+        try {
+            listaUsuarios = usuarioDAO.consultaUsuarios(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ContratosServletController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Store info to the request attribute before forwarding.
-        request.setAttribute("usuario", usuarioLogado);
- 
+        // Store info in request attribute, before forward to views
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("usuarios", listaUsuarios);
+         
         // If the usuario has logged in, then forward to the page
         // /WEB-INF/views/usuarioInfoView.jsp
         RequestDispatcher dispatcher //
@@ -56,6 +69,8 @@ public class UsuariosServletController extends HttpServlet {
         dispatcher.forward(request, response);
  
     }
+    
+    
  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -64,8 +79,3 @@ public class UsuariosServletController extends HttpServlet {
     }
  
 }
-
-
-
-
-

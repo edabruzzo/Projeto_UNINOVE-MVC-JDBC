@@ -14,6 +14,7 @@ import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -41,6 +42,10 @@ public class Autenticação implements Filter {
             throws IOException, ServletException {
         if (debug) {
             log("Autenticação:DoBeforeProcessing");
+             HttpServletRequest httpRequest = (HttpServletRequest) request;
+            System.out.println("FiltroAutenticação  - verificando se há usuário logado na sessão "
+                    + " para o seguinte servlet: " + httpRequest.getServletPath());
+
         }
 
         // Write code here to process the request and/or response before
@@ -114,7 +119,13 @@ public class Autenticação implements Filter {
         Usuario usuarioLogado = ConexaoServletController.getUsuarioLogado(session);
 
         if (usuarioLogado == null) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/jdbcDependente/login");
+            //       httpResponse.sendRedirect(httpRequest.getContextPath() + "/jdbcDependente/login");
+             System.out.println("FiltroAutenticação  - NÃO há usuário logado na sessão "
+                    + " para o seguinte servlet: " + httpRequest.getServletPath());
+            RequestDispatcher dispatcher //
+                    = request.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
+            dispatcher.forward(request, response);
+
         } else {
 
             Throwable problem = null;

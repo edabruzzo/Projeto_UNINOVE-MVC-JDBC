@@ -15,7 +15,11 @@
 <body style="background-color: black; color:white">
 
         <jsp:include page="/template/_header.jsp"></jsp:include>
-        <jsp:include page="/template/_menu.jsp"></jsp:include>
+  <div style="padding: 5px;">
+    <h3>
+   <a href="${pageContext.request.contextPath}/jdbcDependente/login">Login</a>
+   </h3>
+</div>  
 
             <h3>Home Page</h3>
 

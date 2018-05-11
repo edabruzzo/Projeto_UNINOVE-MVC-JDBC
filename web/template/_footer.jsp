@@ -9,7 +9,7 @@
   
 <div style="background:black; color: white; text-align: center; padding: 5px; margin-top: 10px;">
   
-    <h3>@Copyright Trabalho feito pelos alunos Edwin, Emmanuel e Wellington para a 
+    <h3>@Copyright Trabalho feito pelos alunos Edwin, Emmanuel e Welington para a 
   
   disciplina Programação Orientada a Objetos - Prof. Gerson
   </h3>
