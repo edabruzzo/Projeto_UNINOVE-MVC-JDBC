@@ -8,9 +8,6 @@ package Controller;
 import DAO.UsuarioDAO;
 import Model.Usuario;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = {"/login"}, loadOnStartup = 0)
+@WebServlet(urlPatterns = {"/login"}, loadOnStartup = 1)
 public class LoginServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -39,14 +36,14 @@ public class LoginServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+/*
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access directly into JSP pages placed in WEB-INF)
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
 
         dispatcher.forward(request, response);
-
+*/
     }
 
     // When the usuario enters usuarioName & password, and click Submit.
@@ -68,10 +65,14 @@ public class LoginServletController extends HttpServlet {
             errorString = "Login e senha obrigatórios!";
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
-            RequestDispatcher dispatcher //
+/*            RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-
             dispatcher.forward(request, response);
+*/
+
+                HttpSession session = request.getSession();
+                response.sendRedirect(request.getContextPath() + "/login");
+
 
         } else {
 
@@ -92,7 +93,7 @@ public class LoginServletController extends HttpServlet {
 
                 // Forward to /WEB-INF/views/login.jsp
                 RequestDispatcher dispatcher //
-                        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                        = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
 
                 dispatcher.forward(request, response);
             } // If no error

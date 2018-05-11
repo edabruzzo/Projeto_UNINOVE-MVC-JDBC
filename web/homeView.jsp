@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <title>Home Page</title>
     </head>
-    <body style="background-color: black; color:white">
+<body style="background-color: black; color:white">
 
         <jsp:include page="/template/_header.jsp"></jsp:include>
         <jsp:include page="/template/_menu.jsp"></jsp:include>

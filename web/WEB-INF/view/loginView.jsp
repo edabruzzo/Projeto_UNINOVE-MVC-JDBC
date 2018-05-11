@@ -12,19 +12,20 @@
       <meta charset="UTF-8">
       <title>Login</title>
    </head>
-   <body>
-      <jsp:include page="/template/_header.jsp"></jsp:include>
+ <body style="background-color: black; color:white">
+
+     <jsp:include page="/template/_header.jsp"></jsp:include>
       <jsp:include page="/template/_menu.jsp"></jsp:include>
  
       <h3>Login Page</h3>
-      <p style="color: red;">${errorString}</p>
+      <h4><p style="color: red;">${errorString}</p></h4>
  
  
       <form method="POST" action="${pageContext.request.contextPath}/login">
          <table border="0">
             <tr>
                <td>Login</td>
-               <td><input type="text" name="nome" value= "${usuario.nome}" /> </td>
+               <td><input type="text" name="login" value= "${usuario.login}" /> </td>
             </tr>
             <tr>
                <td>Password</td>
@@ -39,9 +40,9 @@
          </table>
       </form>
  
-      <p style="color:blue;">Usuário pré-cadastrado: </p>
-          <p style="color:blue;">LOGIN: fulano</p>
-           <p style="color:blue;">PASSWORD: 123</p>
+      <strong>Usuário pré-cadastrado: </strong>
+      <strong>LOGIN: fulano</strong>
+      <strong>PASSWORD: 123</strong>
            
       <jsp:include page="/template/_footer.jsp"></jsp:include>
    </body>

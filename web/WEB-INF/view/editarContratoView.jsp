@@ -13,7 +13,8 @@
       <meta charset="UTF-8">
       <title>Editar Contrato</title>
    </head>
-   <body>
+
+<body style="background-color: black; color:white">
  
       <jsp:include page="/template/_header.jsp"></jsp:include>
       <jsp:include page="/template/_menu.jsp"></jsp:include>
