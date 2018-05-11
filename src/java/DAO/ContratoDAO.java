@@ -141,12 +141,17 @@ public class ContratoDAO {
     public Contrato extraiContratoResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         Contrato contrato = new Contrato();
-
+        
+        while(rs.next()){
+            
         contrato.setCodigo(rs.getInt("codigo"));
         contrato.setObjeto(rs.getString("objeto"));
         contrato.setContratado(rs.getString("contratado"));
         contrato.setAtivo(rs.getBoolean("ativo"));
         contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
+            
+            
+        }
 
         return contrato;
     }

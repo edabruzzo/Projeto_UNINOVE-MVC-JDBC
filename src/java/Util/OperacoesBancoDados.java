@@ -144,7 +144,7 @@ public class OperacoesBancoDados {
             Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
-            rs.close();
+            //rs.close(); NÃO POSSO FECHAR O RESULTSET AQUI
             stmt.close();
             fecharConexao(conn);
 

@@ -161,13 +161,17 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     public Usuario extraiUsuarioResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         Usuario usuario = new Usuario();
-
+        
+        while(rs.next()){
+            
         usuario.setMatricula(rs.getInt("matricula"));
         usuario.setNome(rs.getString("nome"));
         usuario.setDepartamento(rs.getString("departamento"));
         usuario.setLogin(rs.getString("login"));
         usuario.setPassword(rs.getString("password"));
-        
+            
+        }
+    //NÃO POSSO FECHAR O RESULTSET AQUI    
         return usuario;
     }
 
@@ -178,7 +182,7 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
         while (rs.next()) {
             listaUsuarios.add(this.extraiUsuarioResultSet(rs));
         }
-        rs.close();
+        rs.close();//AQUI EU POSSO FECHAR O RESULTSET
 
         return listaUsuarios;
 
