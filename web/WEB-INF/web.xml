@@ -52,19 +52,6 @@ diretamente nas páginas. Outra forma de fazer a mesma coisa é por meio da decl
     -->
 
 
-<!--
-  CRIANDO PROGRAMATICAMENTE
-  
-  <filter-mapping>
-    <filter-name>FiltroJDBC</filter-name>
-   
-</filter-mapping>
- 
-<filter-mapping>
-    <filter-name>FiltroCookies</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
--->
 
 
 </web-app>

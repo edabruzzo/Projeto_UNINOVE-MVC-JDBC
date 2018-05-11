@@ -23,7 +23,7 @@ public class ContratoDAO {
 
     OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
-    public void criarContrato(Connection conn, Contrato contrato) throws ClassNotFoundException, SQLException {
+    public void criarContrato(Contrato contrato) throws ClassNotFoundException, SQLException {
 
         String sql = "INSERT INTO tb_contrato(objetoContrato, orcamentoComprometido, "
                 + "ATIVO, contratado) "
@@ -33,11 +33,11 @@ public class ContratoDAO {
                 + ", '" + contrato.getContratado()
                 + "');";
 
-        fabrica.executaQuerieUpdate(conn, sql);
+        fabrica.executaQuerieUpdate(sql);
 
     }
 
-    public void editarContrato(Connection conn, Contrato contrato) throws ClassNotFoundException, SQLException {
+    public void editarContrato(Contrato contrato) throws ClassNotFoundException, SQLException {
 
         String sql1 = "UPDATE tb_contrato "
                 + "SET objetoContrato = '" + contrato.getObjeto()
@@ -46,33 +46,33 @@ public class ContratoDAO {
                 + "', ativo = " + contrato.isAtivo()
                 + " WHERE codigo = " + contrato.getCodigo() + ";";
 
-        fabrica.executaQuerieUpdate(conn, sql1);
+        fabrica.executaQuerieUpdate(sql1);
     }
 
-    public void removerContrato(Connection conn, int codigo) throws SQLException, ClassNotFoundException {
+    public void removerContrato(int codigo) throws SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM tb_contrato WHERE codigo = "
                 + codigo + ";";
 
-        fabrica.executaQuerieUpdate(conn, sql);
+        fabrica.executaQuerieUpdate(sql);
     }
 
-    public List<Contrato> consultaContratos(Connection conn) throws ClassNotFoundException, SQLException {
+    public List<Contrato> consultaContratos() throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato;";
 
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
 
         return this.extrairListaContratosResultSet(rs);
 
     }
 
-    public Contrato findContrato(Connection conn, int codigo) throws ClassNotFoundException, SQLException {
+    public Contrato findContrato(int codigo) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE codigo = "
                 + codigo + " ORDER BY orcamentoComprometido DESC;";
 
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         Contrato contrato = this.extraiContratoResultSet(rs);
         rs.close();
 
@@ -80,24 +80,24 @@ public class ContratoDAO {
 
     }
 
-    public List<Contrato> findByObjeto(Connection conn, String objeto) throws ClassNotFoundException, SQLException {
+    public List<Contrato> findByObjeto(String objeto) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE objeto LIKE '"
                 + objeto + "';";
 
-        ResultSet  rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet  rs = fabrica.executaQuerieResultSet(sql);
         return this.extrairListaContratosResultSet(rs);
 
     }
 
-    public Contrato findByCodigo(Connection conn, Integer codigo) throws ClassNotFoundException, SQLException {
+    public Contrato findByCodigo(Integer codigo) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE codigo = "
                 + codigo + ";";
 
         ResultSet rs = null;
         try {
-            rs = fabrica.executaQuerieResultSet(conn, sql);
+            rs = fabrica.executaQuerieResultSet(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,30 +108,30 @@ public class ContratoDAO {
 
     }
 
-    public List<Contrato> findAtivos(Connection conn) throws ClassNotFoundException, SQLException {
+    public List<Contrato> findAtivos() throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE ativo IS TRUE;";
 
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         return this.extrairListaContratosResultSet(rs);
 
     }
 
-    public List<Contrato> findInativos(Connection conn) throws ClassNotFoundException, SQLException {
+    public List<Contrato> findInativos() throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE ativo IS FALSE;";
 
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         return this.extrairListaContratosResultSet(rs);
 
     }
 
-    public List<Contrato> findByContratado(Connection conn, String contratado) throws ClassNotFoundException, SQLException {
+    public List<Contrato> findByContratado(String contratado) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE contratado = '"
                 + contratado + "';";
 
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         return this.extrairListaContratosResultSet(rs);
 
     }

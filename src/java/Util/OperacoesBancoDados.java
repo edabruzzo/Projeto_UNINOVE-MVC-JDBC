@@ -22,7 +22,7 @@ public class OperacoesBancoDados {
 
     private String URL;
 
-    public void criaInfraestrutura(Connection conn) throws SQLException, ClassNotFoundException {
+    public void criaInfraestrutura() throws SQLException, ClassNotFoundException {
 
 
         ArrayList<String> listaSQLs = new ArrayList();
@@ -51,7 +51,7 @@ public class OperacoesBancoDados {
                 + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01', 'fulano', '123')";
         listaSQLs.add(sql4);
 
-        executaBatchUpdate(conn, listaSQLs);
+        executaBatchUpdate(listaSQLs);
 
     }
 
@@ -127,9 +127,9 @@ public class OperacoesBancoDados {
         }
     }
 
-    public ResultSet executaQuerieResultSet(Connection conn, String sql) throws ClassNotFoundException, SQLException {
+    public ResultSet executaQuerieResultSet(String sql) throws ClassNotFoundException, SQLException {
 
-        conn = criaConexao();
+        Connection conn = criaConexao();
         Statement stmt = conn.createStatement();
 
         ResultSet rs = null;
@@ -154,9 +154,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieSemResultado(Connection conn, String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieSemResultado(String sql) throws ClassNotFoundException, SQLException {
 
-        conn = criaConexao();
+        Connection conn = criaConexao();
         Statement stmt = conn.createStatement();
 
         try {
@@ -178,9 +178,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieUpdate(Connection conn, String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieUpdate(String sql) throws ClassNotFoundException, SQLException {
 
-        conn = criaConexao();
+        Connection conn = criaConexao();
         Statement stmt = conn.createStatement();
         conn.setAutoCommit(false);
 
@@ -213,7 +213,9 @@ public class OperacoesBancoDados {
         this.URL = URL;
     }
 
-    public void executaBatchUpdate(Connection conn, ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
+    public void executaBatchUpdate(ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
+
+        Connection conn = criaConexao();
 
         conn = criaConexao();
         Statement stmt = conn.createStatement();
@@ -244,35 +246,10 @@ public class OperacoesBancoDados {
 
     
     
-    public static void closeQuietly(Connection conn) {
-        try {
-            if (conn != null){
-
-                conn.close();
-
-            }else return;
-        } catch (Exception e) {
-            
-            e.printStackTrace();
-            return;
-        }
-    }
- 
-    public static void rollbackQuietly(Connection conn) {
-        try {
-            if(conn != null){
-                conn.rollback();
-            }return;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-    }
 
     public void deletaBanco() throws ClassNotFoundException, SQLException{
         
-        
-         Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         String USER = "root";
         String PASSWORD = "root";
         this.setURL("jdbc:mysql://localhost:3306/");
@@ -286,7 +263,9 @@ public class OperacoesBancoDados {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             stmt = conn.createStatement();
             conn.setAutoCommit(false);
+            System.out.println("DELETANDO BASE DE DADOS controleFinanceiroUNINOVE");
             stmt.execute("DROP DATABASE IF EXISTS controleFinanceiroUNINOVE");
+            System.out.println("BASE DE DADOS controleFinanceiroUNINOVE DELETADA COM SUCESSO!");
             conn.commit();
         } catch (SQLException ex) {
             conn.rollback();

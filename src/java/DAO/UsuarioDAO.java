@@ -24,7 +24,7 @@ public class UsuarioDAO {
     
 OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
-       public void criarUsuario(Connection conn, Usuario usuario) throws ClassNotFoundException, SQLException {
+       public void criarUsuario( Usuario usuario) throws ClassNotFoundException, SQLException {
 
        
           String sql = "INSERT INTO tb_usuario (NOME, DEPARTAMENTO, dataAdmissao, "
@@ -37,12 +37,12 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
                 + "')";
 
 
-            fabrica.executaQuerieUpdate(conn, sql);
+            fabrica.executaQuerieUpdate(sql);
 
         }
 
     
-       public void editarUsuario(Connection conn, Usuario usuario) throws ClassNotFoundException, SQLException {
+       public void editarUsuario( Usuario usuario) throws ClassNotFoundException, SQLException {
 
         String sql1 = "UPDATE tb_usuario "
                 + "SET LOGIN = '" + usuario.getLogin()
@@ -53,18 +53,18 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
                 + " WHERE matricula = " + usuario.getMatricula();
 
 
-            fabrica.executaQuerieUpdate(conn, sql1);
+            fabrica.executaQuerieUpdate(sql1);
     }
 
 
 
-      public void removerUsuario(Connection conn, int matricula) throws SQLException, ClassNotFoundException {
+      public void removerUsuario( int matricula) throws SQLException, ClassNotFoundException {
 
       
               String sql = "DELETE FROM tb_usuario WHERE matricula = "
                     + matricula + ";";
             
-            fabrica.executaQuerieUpdate(conn, sql);
+            fabrica.executaQuerieUpdate(sql);
     }
 
     public List<Usuario> consultaUsuarios(Connection conn) throws ClassNotFoundException, SQLException {
@@ -72,20 +72,20 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
         String sql = "SELECT * FROM tb_usuario;";
         
         
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         
         return this.extrairListaUsuariosResultSet(rs);
     
     }
 
 
-    public Usuario findUsuario(Connection conn, int matricula) throws ClassNotFoundException, SQLException {
+    public Usuario findUsuario( int matricula) throws ClassNotFoundException, SQLException {
 
 
         String sql = "SELECT * FROM tb_usuario WHERE matricula = "
                 +matricula+";";
         
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         Usuario usuario = this.extraiUsuarioResultSet(rs);
         rs.close();
         
@@ -94,12 +94,12 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     }
 
 
-    public Usuario findByLoginSenha(Connection conn, String login, String senha) throws ClassNotFoundException, SQLException {
+    public Usuario findByLoginSenha( String login, String senha) throws ClassNotFoundException, SQLException {
 
             String sql = "SELECT * FROM tb_usuario WHERE LOGIN LIKE '"
                     + login + "' AND PASSWORD LIKE '" + senha + "'";
 
-            ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+            ResultSet rs = fabrica.executaQuerieResultSet(sql);
             Usuario usuario  = this.extraiUsuarioResultSet(rs);
             rs.close();
             
@@ -109,7 +109,7 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     
     
 
-    public Usuario findByNome(Connection conn, String nome) throws ClassNotFoundException, SQLException {
+    public Usuario findByNome( String nome) throws ClassNotFoundException, SQLException {
     
     
         String sql = "SELECT * FROM tb_usuario WHERE nome LIKE '"
@@ -117,7 +117,7 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
         
         ResultSet rs = null;
         try {
-            rs = fabrica.executaQuerieResultSet(conn, sql);
+            rs = fabrica.executaQuerieResultSet(sql);
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,27 +131,27 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     
     
     
-        public List<Usuario> findByDepartamento(Connection conn, String departamento) throws ClassNotFoundException, SQLException {
+        public List<Usuario> findByDepartamento( String departamento) throws ClassNotFoundException, SQLException {
    
         String sql = "SELECT * FROM tb_usuario WHERE departamento = '"+departamento
                 + "';";
         
         
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         
         return this.extrairListaUsuariosResultSet(rs);
     
     }
 
     
-        public List<Usuario> findByDataAdmissao(Connection conn, Date dataInicial, Date dataFinal) throws ClassNotFoundException, SQLException {
+        public List<Usuario> findByDataAdmissao( Date dataInicial, Date dataFinal) throws ClassNotFoundException, SQLException {
    
         String sql = "SELECT * FROM tb_usuario WHERE dataAdmissao between '"+dataInicial
                 + " AND '"+dataFinal
                 + "';";
         
         
-        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
+        ResultSet rs = fabrica.executaQuerieResultSet(sql);
         
         return this.extrairListaUsuariosResultSet(rs);
     

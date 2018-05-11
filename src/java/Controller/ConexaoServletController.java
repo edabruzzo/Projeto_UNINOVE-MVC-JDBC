@@ -6,13 +6,8 @@
 package Controller;
 
 import Model.Usuario;
-import java.sql.Connection;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,24 +17,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ConexaoServletController", urlPatterns = {"/jdbcDependente/*"}, loadOnStartup = 0)
 public class ConexaoServletController extends HttpServlet {
 
-public static final String ATRIBUTO_CONEXAO = "ATRIBUTO_PARA_CONEXÃO";
- 
-    private static final String ATRIBUTO_NOME_USUARIO = "ATRIBUTO_PARA_GUARDAR_NOME_USUARIO_NO_COOKIE";
-    
-    private static final long serialVersionUID = 8391436750459991867L;
- 
-    // Store Connection in request attribute.
-    // (Information guardard only exist during requests)
-    public static void guardarConexao(ServletRequest request, Connection conn) {
-        request.setAttribute(ATRIBUTO_CONEXAO, conn);
-    }
- 
-    // Get the Connection object has been guardard in attribute of the request.
-    public static Connection getConexaoGuardada(ServletRequest request) {
-        Connection conn = (Connection) request.getAttribute(ATRIBUTO_CONEXAO);
-        return conn;
-    }
- 
+    private static final long serialVersionUID = 1L;
+
     // Guarda usuario info in Session.
     public static void guardarUsuarioLogado(HttpSession session, Usuario usuarioLogado) {
         // On the JSP can access via ${usuarioLogado}
@@ -52,34 +31,5 @@ public static final String ATRIBUTO_CONEXAO = "ATRIBUTO_PARA_CONEXÃO";
         return usuarioLogado;
     }
  
-    // Store info in Cookie
-    public static void guardarUsuarioCookie(HttpServletResponse response, Usuario usuario) {
-        System.out.println("Guardando Usuário no Cookie pelo período de 01 dia");
-        Cookie cookieNomeUsuario = new Cookie(ATRIBUTO_NOME_USUARIO, usuario.getNome());
-        // 1 day (Converted to seconds)
-        cookieNomeUsuario.setMaxAge(24 * 60 * 60);
-        response.addCookie(cookieNomeUsuario);
-    }
- 
-    public static String getUsuarioNomeInCookie(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (ATRIBUTO_NOME_USUARIO.equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
- 
-    // Delete cookie.
-    public static void deletaUsuarioCookie(HttpServletResponse response) {
-        Cookie cookieNomeUsuario = new Cookie(ATRIBUTO_NOME_USUARIO, null);
-        System.out.println("Matando cookie do usuario");
-        // 0 segundos (Esta sessão irá expirar)
-        cookieNomeUsuario.setMaxAge(0);
-        response.addCookie(cookieNomeUsuario);
-    }
  
 }

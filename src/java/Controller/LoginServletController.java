@@ -9,7 +9,6 @@ package Controller;
 import DAO.UsuarioDAO;
 import Model.Usuario;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/jdbcDependente/login" }, loadOnStartup = 0)
+@WebServlet(urlPatterns = { "/login" }, loadOnStartup = 0)
 public class LoginServletController extends HttpServlet{
     
 
@@ -60,10 +59,11 @@ public class LoginServletController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String rememberMeStr = request.getParameter("rememberMe");
-        boolean remember = "Y".equals(rememberMeStr);
+       
  
         Usuario usuario = null;
         boolean hasError = false;
@@ -74,10 +74,9 @@ public class LoginServletController extends HttpServlet{
             errorString = "Login e senha obrigatórios!";
         } else {
             
-            Connection conn = ConexaoServletController.getConexaoGuardada(request);
             try {
                 // Find the usuario in the DB.
-                usuario = usuarioDAO.findByLoginSenha(conn, login, password);
+                usuario = usuarioDAO.findByLoginSenha(login, password);
  
                 if (usuario == null) {
                     hasError = true;
@@ -118,13 +117,6 @@ public class LoginServletController extends HttpServlet{
             HttpSession session = request.getSession();
             ConexaoServletController.guardarUsuarioLogado(session, usuario);
  
-            // If usuario checked "Remember me".
-            if (remember) {
-            ConexaoServletController.guardarUsuarioLogado(session, usuario);
-            }
-            // Else delete cookie.
-            else {
-                ConexaoServletController.deletaUsuarioCookie(response);
             }
  
             // Redirect to usuarioInfo page.
@@ -132,4 +124,4 @@ public class LoginServletController extends HttpServlet{
         }
     }
  
-}
+

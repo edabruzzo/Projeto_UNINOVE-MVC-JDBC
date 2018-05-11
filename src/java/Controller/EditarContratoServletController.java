@@ -45,7 +45,7 @@ public class EditarContratoServletController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Connection conn = ConexaoServletController.getConexaoGuardada(request);
+      
         
         //NECESSÁRIO FAZER O PARSER DO PARÂMETRO
         String codigoStrg = (String) request.getParameter("codigo");
@@ -57,7 +57,7 @@ public class EditarContratoServletController extends HttpServlet {
         String errorString = null;
  
         try {
-            contrato = contratoDAO.findByCodigo(conn, codigo);
+            contrato = contratoDAO.findByCodigo(codigo);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -89,8 +89,7 @@ public class EditarContratoServletController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       Connection conn = ConexaoServletController.getConexaoGuardada(request);
- 
+   
         String code = (String) request.getParameter("codigo");
         String objetoContrato = (String) request.getParameter("objeto");
         String contratado = (String) request.getParameter("contratado");
@@ -117,7 +116,7 @@ public class EditarContratoServletController extends HttpServlet {
         String errorString = null;
  
         try {
-            contratoDAO.editarContrato(conn, contrato);
+            contratoDAO.editarContrato(contrato);
             
         } catch (SQLException e) {
             e.printStackTrace();

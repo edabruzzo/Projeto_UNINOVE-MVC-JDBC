@@ -31,7 +31,7 @@
             </ul>
 
 
-            <form method="POST" action="${pageContext.request.contextPath}/login">
+            <form method="POST" action="${pageContext.request.contextPath}/criaInfra">
             
                 <text>
 
@@ -50,7 +50,7 @@
                 Inicie o serviço MYSQL e, após, clique no campo abaixo: 
                
                 </text>
-            <h2><a href="${pageContext.request.contextPath}/criaInfra">CRIAR INFRAESTRUTURA</a></h2>
+                <input type="submit" value="CRIAR INFRAESTRUTURA"/>
 
         </form>
 

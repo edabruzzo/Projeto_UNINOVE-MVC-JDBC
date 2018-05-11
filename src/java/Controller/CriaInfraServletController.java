@@ -108,6 +108,14 @@ public class CriaInfraServletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try {
+            criarBaseDados(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CriaInfraServletController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CriaInfraServletController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }
@@ -120,8 +128,7 @@ public class CriaInfraServletController extends HttpServlet {
 
         try {
 
-            conn = fabrica.criaConexao();
-            usuarioDAO.findUsuario(conn, 1);
+            usuarioDAO.findUsuario(1);
             errorString = "A base de dados não foi criada com sucesso!";
             request.setAttribute("errorString", errorString);
             // Forward to /WEB-INF/views/login.jsp
@@ -136,7 +143,7 @@ public class CriaInfraServletController extends HttpServlet {
 
             try {
 
-                fabrica.criaInfraestrutura(conn);
+                fabrica.criaInfraestrutura();
                 errorString = "A infraestrutura foi criada com sucesso!";
                 request.setAttribute("errorString", errorString);
                 // Forward to /WEB-INF/views/login.jsp

@@ -43,12 +43,11 @@ public class ContratosServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Connection conn = ConexaoServletController.getConexaoGuardada(request);
- 
+       
         String errorString = null;
         List<Contrato> listaContratos = null;
         try {
-            listaContratos = contratoDAO.consultaContratos(conn);
+            listaContratos = contratoDAO.consultaContratos();
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
