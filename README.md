@@ -1,0 +1,6 @@
+# Projeto_UNINOVE-MVC-JDBC
+PROJETO CRIADO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS
+
+UTILIZANDO PRINCIPALMENTE COMO REFERÊNCIA O SEGUINTE TUTORIAL:
+
+https://o7planning.org/en/10285/create-a-simple-java-web-application-using-servlet-jsp-and-jdbc#a812184
