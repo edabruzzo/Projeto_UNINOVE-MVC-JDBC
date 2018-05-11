@@ -38,7 +38,7 @@ public class HomeServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+/*
         String userPath = request.getServletPath();
 
         // if category page is requested
@@ -63,7 +63,7 @@ public class HomeServletController extends HttpServlet {
             }
 
         }
-
+*/
     }
 
 }
