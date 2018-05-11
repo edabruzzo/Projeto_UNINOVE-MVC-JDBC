@@ -35,7 +35,7 @@ public class ContratosServletController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
     ContratoDAO contratoDAO = new ContratoDAO();
- 
+    
     public ContratosServletController() {
         super();
     }
@@ -43,11 +43,13 @@ public class ContratosServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    Connection conn = ConexaoServletController.getConexaoGuardada(request);
        
         String errorString = null;
         List<Contrato> listaContratos = null;
         try {
-            listaContratos = contratoDAO.consultaContratos();
+            listaContratos = contratoDAO.consultaContratos(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();

@@ -53,7 +53,10 @@ public class CriarContratoServletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
+        Connection conn = ConexaoServletController.getConexaoGuardada(request);
+
+        
         String code = (String) request.getParameter("codigo");
         String objetoContrato = (String) request.getParameter("objeto");
         String contratado = (String) request.getParameter("contratado");
@@ -85,7 +88,7 @@ Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, 
  
         if (errorString == null) {
             try {
-                contratoDAO.criarContrato(contrato);
+                contratoDAO.criarContrato(conn, contrato);
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorString = e.getMessage();

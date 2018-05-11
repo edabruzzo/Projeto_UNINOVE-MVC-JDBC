@@ -50,8 +50,10 @@ public class OperacoesBancoDados {
                 + "login, password) "
                 + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01', 'fulano', '123')";
         listaSQLs.add(sql4);
+        
+        
 
-        executaBatchUpdate(listaSQLs);
+        executaBatchUpdate(this.criaConexao(), listaSQLs);
 
     }
 
@@ -127,9 +129,8 @@ public class OperacoesBancoDados {
         }
     }
 
-    public ResultSet executaQuerieResultSet(String sql) throws ClassNotFoundException, SQLException {
+    public ResultSet executaQuerieResultSet(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
         Statement stmt = conn.createStatement();
 
         ResultSet rs = null;
@@ -145,8 +146,8 @@ public class OperacoesBancoDados {
         } finally {
 
             //rs.close(); NÃO POSSO FECHAR O RESULTSET AQUI
-            stmt.close();
-            fecharConexao(conn);
+            //stmt.close();
+            //fecharConexao(conn);
 
         }
 
@@ -154,9 +155,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieSemResultado(String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieSemResultado(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
+       
         Statement stmt = conn.createStatement();
 
         try {
@@ -178,9 +179,9 @@ public class OperacoesBancoDados {
 
     }
 
-    public void executaQuerieUpdate(String sql) throws ClassNotFoundException, SQLException {
+    public void executaQuerieUpdate(Connection conn, String sql) throws ClassNotFoundException, SQLException {
 
-        Connection conn = criaConexao();
+       
         Statement stmt = conn.createStatement();
         conn.setAutoCommit(false);
 
@@ -213,9 +214,7 @@ public class OperacoesBancoDados {
         this.URL = URL;
     }
 
-    public void executaBatchUpdate(ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
-
-        Connection conn = criaConexao();
+    public void executaBatchUpdate(Connection conn, ArrayList listaSQLs) throws SQLException, ClassNotFoundException {
 
         conn = criaConexao();
         Statement stmt = conn.createStatement();

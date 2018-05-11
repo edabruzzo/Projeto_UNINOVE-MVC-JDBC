@@ -41,6 +41,8 @@ public class DeletarContratoServletController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+            Connection conn = ConexaoServletController.getConexaoGuardada(request);
+
          String codigoString = (String) request.getParameter("codigo");
  
         int codigo = 0;
@@ -49,7 +51,7 @@ public class DeletarContratoServletController extends HttpServlet {
         String errorString = null;
  
         try {
-            contratoDAO.removerContrato(codigo);
+            contratoDAO.removerContrato(conn, codigo);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();

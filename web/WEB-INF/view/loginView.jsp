@@ -21,7 +21,7 @@
       <h4><p style="color: red;">${errorString}</p></h4>
  
  
-      <form method="POST" action="${pageContext.request.contextPath}/login">
+      <form method="POST" action="${pageContext.request.contextPath}/jdbcDependente/login">
          <table border="0">
             <tr>
                <td>Login</td>

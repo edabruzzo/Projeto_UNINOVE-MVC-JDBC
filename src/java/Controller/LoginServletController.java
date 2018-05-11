@@ -8,6 +8,7 @@ package Controller;
 import DAO.UsuarioDAO;
 import Model.Usuario;
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = {"/login"}, loadOnStartup = 1)
+@WebServlet(urlPatterns = {"/jdbcDependente/login"}, loadOnStartup = 1)
 public class LoginServletController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,10 @@ public class LoginServletController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
+        Connection conn = ConexaoServletController.getConexaoGuardada(request);
+
+        
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
@@ -71,13 +76,13 @@ public class LoginServletController extends HttpServlet {
 */
 
                 HttpSession session = request.getSession();
-                response.sendRedirect(request.getContextPath() + "/login");
+                response.sendRedirect(request.getContextPath() + "/jdbcDependente/login");
 
 
         } else {
 
             try {
-                usuario = usuarioDAO.findByLoginSenha(login, password);
+                usuario = usuarioDAO.findByLoginSenha(conn, login, password);
             } catch (Exception ex) {
 
                 hasError = true;
