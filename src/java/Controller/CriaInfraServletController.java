@@ -72,7 +72,7 @@ public class CriaInfraServletController extends HttpServlet {
             request.setAttribute("errorString", errorString);
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("WEB-INF/view/loginView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
             dispatcher.forward(request, response);
 
         } catch (ClassNotFoundException ex) {
