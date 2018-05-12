@@ -22,7 +22,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
  
 /**
  *
@@ -64,7 +63,7 @@ public class ContratosServletController extends HttpServlet {
          
         // Forward to /WEB-INF/views/contratosView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/contratosView.jsp");
+                .getRequestDispatcher("/WEB-INF/view/contratosView.jsp");
         dispatcher.forward(request, response);
     }
  

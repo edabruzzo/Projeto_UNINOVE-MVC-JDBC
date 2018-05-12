@@ -44,7 +44,7 @@ public class CriarContratoServletController extends HttpServlet {
             throws ServletException, IOException {
  
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/criarContratoView.jsp");
+                .getRequestDispatcher("/WEB-INF/view/criarContratoView.jsp");
         dispatcher.forward(request, response);
     }
  
@@ -104,7 +104,7 @@ Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, 
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/criarContratoView.jsp");
+                    .getRequestDispatcher("/WEB-INF/view/criarContratoView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.

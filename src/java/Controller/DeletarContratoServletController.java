@@ -65,7 +65,7 @@ public class DeletarContratoServletController extends HttpServlet {
             request.setAttribute("errorString", errorString);
             // 
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/erroDeletarContratoView.jsp");
+                    .getRequestDispatcher("/WEB-INF/view/erroDeletarContratoView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.

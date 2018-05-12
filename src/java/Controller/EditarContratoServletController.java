@@ -79,7 +79,7 @@ public class EditarContratoServletController extends HttpServlet {
         request.setAttribute("contrato", contrato);
  
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/editarContratoView.jsp");
+                .getRequestDispatcher("/WEB-INF/view/editarContratoView.jsp");
         dispatcher.forward(request, response);
  
     }
@@ -133,7 +133,7 @@ public class EditarContratoServletController extends HttpServlet {
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/editarContratoView.jsp");
+                    .getRequestDispatcher("/WEB-INF/view/editarContratoView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.
