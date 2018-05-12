@@ -7,10 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
   
-<div style="background:black; color: white; text-align: center; padding: 5px; margin-top: 10px;">
+<div style="background: darkgray; text-align: center; padding: 5px; margin-top: 10px;">
   
-    <h3>@Copyright Trabalho feito pelos alunos Edwin, Emmanuel e Welington para a 
+    <h3>@Copyright Trabalho feito pelos alunos EDWIN, EMMANUEL e WELINGTON para a 
   
-  disciplina Programação Orientada a Objetos - Prof. Gerson
+  disciplina Programação Orientada a Objetos - Prof. GERSON RISSO
   </h3>
 </div>

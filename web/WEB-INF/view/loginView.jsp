@@ -12,7 +12,7 @@
       <meta charset="UTF-8">
       <title>Login</title>
    </head>
- <body style="background-color: black; color:white">
+    <body style="background-color: activeborder">
 
      <jsp:include page="/template/_header.jsp"></jsp:include>
       <jsp:include page="/template/_menu.jsp"></jsp:include>
@@ -29,7 +29,7 @@
             </tr>
             <tr>
                <td>Password</td>
-               <td><input type="text" name="password" value= "${usuario.password}" /> </td>
+               <td><input type="secret" name="password" value= "${usuario.password}" /> </td>
             </tr>
             <tr>
                <td colspan ="2">

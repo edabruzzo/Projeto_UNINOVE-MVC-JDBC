@@ -41,7 +41,7 @@ public class LoginServletController extends HttpServlet {
         // Forward to /WEB-INF/views/loginView.jsp
         // (Users can not access directly into JSP pages placed in WEB-INF)
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
 
         dispatcher.forward(request, response);
 
@@ -55,7 +55,6 @@ public class LoginServletController extends HttpServlet {
 
         
         Connection conn = ConexaoServletController.getConexaoGuardada(request);
-
         
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -72,7 +71,7 @@ public class LoginServletController extends HttpServlet {
             request.setAttribute("errorString", errorString);
 
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
             dispatcher.forward(request, response);
 
 
@@ -99,7 +98,7 @@ public class LoginServletController extends HttpServlet {
 
                 // Forward to /WEB-INF/views/login.jsp
                 RequestDispatcher dispatcher //
-                        = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
 
                 dispatcher.forward(request, response);
             } // If no error
@@ -110,8 +109,13 @@ public class LoginServletController extends HttpServlet {
                 HttpSession session = request.getSession();
                 ConexaoServletController.guardarUsuarioLogado(session, usuario);
                 // Redirect to usuarioInfo page.
-                 RequestDispatcher dispatcher //
-                 = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuariosInfoView.jsp");
+                 //RequestDispatcher dispatcher = null;//
+        //  = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuariosInfoView.jsp");
+                         
+        //dispatcher  = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuarioTESTES.jsp");
+       
+        String servletPath = request.getServletPath();
+        response.sendRedirect(request.getServletPath().replace("/jdbcDependente/login", "/ProjetoUninoveMVC-JDBC/jdbcDependente/usuariosInfo"));
 
             }
 

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>Controle Financeiro</display-name>
-    <filter>
+  <!--  <filter>
         <filter-name>Autenticação</filter-name>
         <filter-class>Util.Autenticação</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>Autenticação</filter-name>
         <url-pattern>/jdbcDependente/deletarContrato</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+     <filter-mapping>
+        <filter-name>Autenticação</filter-name>
+        <url-pattern>/jdbcDependente/usuariosInfo</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -36,7 +44,7 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
     <filter>
         <filter-name>FiltroJDBC</filter-name>
         <filter-class>Util.FiltroJDBC</filter-class>
@@ -68,12 +76,12 @@ diretamente nas páginas. Outra forma de fazer a mesma coisa é por meio da decl
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>-->
-    <!--   <resource-ref>
-        <res-ref-name>jdbc/projetoUninove</res-ref-name>
+       <resource-ref>
+        <res-ref-name>/jdbc/projetoUNINOVE</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-   </resource-ref>-->
+   </resource-ref>
     <welcome-file-list>
         <welcome-file>homeView.jsp</welcome-file>
     </welcome-file-list>

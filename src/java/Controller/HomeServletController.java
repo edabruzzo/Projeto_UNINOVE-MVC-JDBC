@@ -38,32 +38,10 @@ public class HomeServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/*
-        String userPath = request.getServletPath();
 
-        // if category page is requested
-        if (!userPath.equals("/jdbcDependente/*")) {
-            // TODO: Implement category request
-            // use RequestDispatcher to forward request internally
-            String url = "";
-
-            try {
-                url = "WEB-INF/view/loginView.jsp";
+                String url = "homeView.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
-                return;
-            } catch (Exception ex) {
-                
-                url = "home.jsp";
-                ex.printStackTrace();
-                String errorString = "Não foi possível redirecionar para a página de login,"
-                        + " Tente criar a infraestrutura!";
-                request.setAttribute("errorString", errorString);
-                request.getRequestDispatcher(url).forward(request, response);
-
-            }
-
+           
         }
-*/
-    }
 
 }

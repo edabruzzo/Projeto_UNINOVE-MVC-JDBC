@@ -43,7 +43,8 @@ public class Autenticação implements Filter {
         if (debug) {
             log("Autenticação:DoBeforeProcessing");
              HttpServletRequest httpRequest = (HttpServletRequest) request;
-            System.out.println("FiltroAutenticação  - verificando se há usuário logado na sessão "
+             
+            System.out.println("FILTRO AUTENTICAÇÃO  - verificando se há usuário logado na sessão "
                     + " para o seguinte servlet: " + httpRequest.getServletPath());
 
         }
@@ -118,9 +119,9 @@ public class Autenticação implements Filter {
         HttpSession session = httpRequest.getSession();
         Usuario usuarioLogado = ConexaoServletController.getUsuarioLogado(session);
 
-        if (usuarioLogado == null) {
+        if (usuarioLogado == null && !httpRequest.getServletPath().contains("/login")) {
             //       httpResponse.sendRedirect(httpRequest.getContextPath() + "/jdbcDependente/login");
-             System.out.println("FiltroAutenticação  - NÃO há usuário logado na sessão "
+             System.out.println("FILTRO AUTENTICAÇÃO  - NÃO há usuário logado na sessão "
                     + " para o seguinte servlet: " + httpRequest.getServletPath());
             RequestDispatcher dispatcher //
                     = request.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Emm
  */
-@WebServlet(urlPatterns = { "/jdbcDependente/usuariosInfo" }, loadOnStartup = 0)
+@WebServlet(urlPatterns = { "/jdbcDependente/usuariosInfo" })
 public class UsuariosServletController extends HttpServlet {
 
     
@@ -36,6 +36,7 @@ public class UsuariosServletController extends HttpServlet {
  
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     
+        
     public UsuariosServletController() {
         super();
     }
@@ -43,15 +44,19 @@ public class UsuariosServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+
+
+     
+    HttpSession session = request.getSession();
  
-        
     Connection conn = ConexaoServletController.getConexaoGuardada(request);
        
         String errorString = null;
+        
         List<Usuario> listaUsuarios = null;
-        try {
-            listaUsuarios = usuarioDAO.consultaUsuarios(conn);
+       
+       try {
+           listaUsuarios = usuarioDAO.consultaUsuarios(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -60,12 +65,13 @@ public class UsuariosServletController extends HttpServlet {
         }
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("usuarios", listaUsuarios);
-         
+        request.setAttribute("listaUsuarios", listaUsuarios);
+        
+        List<Usuario> listaRecuperada = (List<Usuario>) request.getServletContext().getAttribute("listaUsuarios");
         // If the usuario has logged in, then forward to the page
         // /WEB-INF/views/usuarioInfoView.jsp
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/usuariosInfoView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuarioTESTES.jsp");
         dispatcher.forward(request, response);
  
     }

@@ -30,11 +30,13 @@ public class ConexaoServletController extends HttpServlet {
     // Store Connection in request attribute.
     // (Information guardard only exist during requests)
     public static void guardarConexao(ServletRequest request, Connection conn) {
+        System.out.println("Guardando conexão JDBC na sessão");
         request.setAttribute(ATRIBUTO_CONEXAO, conn);
     }
  
     // Get the Connection object has been guardard in attribute of the request.
     public static Connection getConexaoGuardada(ServletRequest request) {
+        System.out.println("Recuperando conexão JDBC guardada na sessão");
         Connection conn = (Connection) request.getAttribute(ATRIBUTO_CONEXAO);
         return conn;
     }
@@ -44,11 +46,13 @@ public class ConexaoServletController extends HttpServlet {
     // Guarda usuario info in Session.
     public static void guardarUsuarioLogado(HttpSession session, Usuario usuarioLogado) {
         // On the JSP can access via ${usuarioLogado}
+        System.out.println("Guardando usuário logado na sessão");
         session.setAttribute("usuarioLogado", usuarioLogado);
     }
  
     // Get the usuario information stored in the session.
     public static Usuario getUsuarioLogado(HttpSession session) {
+        System.out.println("Verificando se há usuário logado na sessão");
         Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
         return usuarioLogado;
     }

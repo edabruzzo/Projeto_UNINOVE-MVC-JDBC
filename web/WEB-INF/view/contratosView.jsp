@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <title>LISTA CONTRATOS</title>
     </head>
-<body style="background-color: black; color:white">
+    <body style="background-color: activeborder">
 
         <jsp:include page="/template/_header.jsp"></jsp:include>
         <jsp:include page="/template/_menu.jsp"></jsp:include>

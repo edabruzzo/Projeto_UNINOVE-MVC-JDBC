@@ -4,43 +4,41 @@
     Author     : Emm
 --%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" 
+         contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Home Page</title>
     </head>
-<body style="background-color: black; color:white">
+    <body style="background-color: activeborder">
 
         <jsp:include page="/template/_header.jsp"></jsp:include>
-  <div style="padding: 5px;">
-    <h3>
-   <a href="${pageContext.request.contextPath}/jdbcDependente/login">Login</a>
-   </h3>
-</div>  
+        <jsp:include page="/template/_menu.jsp"></jsp:include>
 
-            <h3>Home Page</h3>
+            <strong>
+                <h3>Home Page</h3>
 
-            <br>PROJETO DESENVOLVIDO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS.<br>
-            <b>Propósito do projeto:</b>
-            <ul>
-                <li>Login</li>
-                <li>Guardar informações do usuário em cookies</li>
-                <li>Gerenciamento de contratos</li>
-                <li>Criação de Contrato</li>
-                <li>Atualização do Contrato</li>
-                <li>Remoção do Contrato</li>
-            </ul>
-
+                <br>PROJETO DESENVOLVIDO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS.<br>
+                <b>Propósito do projeto:</b>
+                <ul>
+                    <li>Login</li>
+                    <li>Guardar informações do usuário em cookies</li>
+                    <li>Gerenciamento de contratos</li>
+                    <li>Criação de Contrato</li>
+                    <li>Atualização do Contrato</li>
+                    <li>Remoção do Contrato</li>
+                </ul>
+            </strong>
 
             <form method="POST" action="${pageContext.request.contextPath}/criaInfra">
-            
-                <text>
 
-                <h3>    <p style="color:red">Se este for seu primeiro acesso :</p></h3>
- 
+            <text>
+
+            <h3>    <p style="color:red">Se este for seu primeiro acesso :</p></h3>
+            <strong>
                 Você terá que criar toda a infraestrutura do sistema.
 
                 Certifique-se de haver uma instância do servidor MySQL de banco de dados
@@ -52,9 +50,10 @@
                 foi iniciado. 
 
                 Inicie o serviço MYSQL e, após, clique no campo abaixo: 
-               
-                </text>
-                <input type="submit" value="CRIAR INFRAESTRUTURA"/>
+            </strong>
+            </text>
+
+            <input type="submit" value="CRIAR INFRAESTRUTURA"/>
 
         </form>
 
