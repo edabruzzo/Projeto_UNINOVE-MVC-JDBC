@@ -4,24 +4,9 @@
     Author     : Emm
 --%>
 
-<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
-<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
-
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-
-
-
- <html>
-    <head>
-        <link rel="stylesheet" type="/text/css" href="/ProjetoUninoveMVC-JDBC/css/projeto.css">
-
 
 
 <div style="background: darkgray; height: 90px; padding: 5px;">

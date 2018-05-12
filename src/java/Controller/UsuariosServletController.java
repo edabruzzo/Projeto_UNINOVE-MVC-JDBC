@@ -33,6 +33,7 @@ public class UsuariosServletController extends HttpServlet {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+
     public UsuariosServletController() {
         super();
     }
@@ -41,16 +42,15 @@ public class UsuariosServletController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
 
         Connection conn = ConexaoServletController.getConexaoGuardada(request);
 
         String errorString = null;
 
         List<Usuario> listaUsuarios = null;
-
+       
         try {
-            listaUsuarios = usuarioDAO.consultaUsuarios(conn);
+           listaUsuarios = usuarioDAO.consultaUsuarios(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -61,12 +61,9 @@ public class UsuariosServletController extends HttpServlet {
         request.setAttribute("errorString", errorString);
         request.setAttribute("listaUsuarios", listaUsuarios);
 
-        // List<Usuario> listaRecuperada = (List<Usuario>) request.getServletContext().getAttribute("listaUsuarios");
-//LISTA RECUPERADA NULA        
-// If the usuario has logged in, then forward to the page
-        // /WEB-INF/views/usuarioInfoView.jsp
+   
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuarioTESTES.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuarioInfoView.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -76,5 +73,6 @@ public class UsuariosServletController extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
-
+    
+    
 }
