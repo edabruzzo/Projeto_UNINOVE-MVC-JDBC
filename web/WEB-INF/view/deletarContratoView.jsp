@@ -20,9 +20,18 @@
     <jsp:include page="/template/_menu.jsp"></jsp:include>
     
     <h3>Deletar Contrato</h3>
+     <p style="color: red;">${errorString}</p>
+ 
+      <c:if test="${not empty contrato}">
+         <form method="POST" action="${pageContext.request.contextPath}/jdbcDependente/deletarContrato">
+            <input type="hidden" name="codigo" value="${contrato.codigo}" />
+                      <input type="submit" value="DELETAR" />
+                      <a href="${pageContext.request.contextPath}/jdbcDependente/contratos">Cancelar</a>
+                 
+         </form>
+      </c:if>
     
-    <p style="color: red;">${errorString}</p>
-    <a href="contratos">Contratos</a>
+    <a href="/jdbcDependente/contratos">Contratos</a>
     
     <jsp:include page="/template/_footer.jsp"></jsp:include>
     

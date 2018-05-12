@@ -24,7 +24,7 @@
        
       <p style="color: red;">${errorString}</p>
        
-      <form method="POST" action="${pageContext.request.contextPath}/criarContrato">
+      <form method="POST" action="${pageContext.request.contextPath}//jdbcDependente/criarContrato">
          <table border="0">
             <tr>
                <td>Código do Contrato</td>
@@ -41,7 +41,7 @@
             <tr>
                <td colspan="2">                   
                    <input type="submit" value="Submit" />
-                   <a href="contratos">Cancelar</a>
+                   <a href="/jdbcDependente/contratos">Cancelar</a>
                </td>
             </tr>
          </table>

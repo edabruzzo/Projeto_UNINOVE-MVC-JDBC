@@ -24,7 +24,7 @@
       <p style="color: red;">${errorString}</p>
  
       <c:if test="${not empty contrato}">
-         <form method="POST" action="${pageContext.request.contextPath}/editarContrato">
+         <form method="POST" action="${pageContext.request.contextPath}/jdbcDependente/editarContrato">
             <input type="hidden" name="codigo" value="${contrato.codigo}" />
             <table border="0">
                <tr>
@@ -51,7 +51,7 @@
                <tr>
                   <td colspan = "2">
                       <input type="submit" value="Submit" />
-                      <a href="${pageContext.request.contextPath}/contratos">Cancelar</a>
+                      <a href="${pageContext.request.contextPath}/jdbcDependente/contratos">Cancelar</a>
                   </td>
                </tr>
             </table>

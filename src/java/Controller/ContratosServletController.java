@@ -60,7 +60,7 @@ public class ContratosServletController extends HttpServlet {
         }
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("contratos", listaContratos);
+        request.setAttribute("listaContratos", listaContratos);
          
         // Forward to /WEB-INF/views/contratosView.jsp
         RequestDispatcher dispatcher = request.getServletContext()

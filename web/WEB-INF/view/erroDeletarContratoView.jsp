@@ -22,7 +22,7 @@
     <h3>Deletar Contrato</h3>
     
     <p style="color: red;">${errorString}</p>
-    <a href="contratos">Contratos</a>
+    <a href="/jdbcDependente/contratos">Contratos</a>
     
     <jsp:include page="/template/_footer.jsp"></jsp:include>
     

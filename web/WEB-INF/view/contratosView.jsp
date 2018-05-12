@@ -39,16 +39,16 @@
                     <td>${contrato.contratado}</td>
                     <td>${contrato.ativo}</td>
                     <td>
-                        <a href="editarContrato?code=${contrato.codigo}">Editar</a>
+                        <a href="/jdbcDependente/editarContrato?code=${contrato.codigo}">Editar</a>
                     </td>
                     <td>
-                        <a href="deletarContrato?code=${contrato.codigo}">Deletar</a>
+                        <a href="/jdbcDependente/deletarContrato?code=${contrato.codigo}">Deletar</a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <a href="criarContrato" >Criar Contrato</a>
+        <a href="/jdbcDependente/criarContrato" >Criar Contrato</a>
 
         <jsp:include page="/template/_footer.jsp"></jsp:include>
 

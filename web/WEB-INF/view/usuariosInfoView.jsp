@@ -45,10 +45,10 @@
                     <td>${usuario.login}</td>
                     <td>${usuario.dataAdmissao}</td>
                     <td>
-                        <a href="editarContrato?code=${usuario.matricula}">Editar</a>
+                        <a href="/jdbcDependente/editarUsuario?code=${usuario.matricula}">Editar</a>
                     </td>
                     <td>
-                        <a href="deletarContrato?code=${usuario.matricula}">Deletar</a>
+                        <a href="/jdbcDependente/deletarUsuario?code=${usuario.matricula}">Deletar</a>
                     </td>
                 </tr>
             </c:forEach>
