@@ -142,7 +142,6 @@ public class ContratoDAO {
 
         Contrato contrato = new Contrato();
         
-        while(rs.next()){
             
         contrato.setCodigo(rs.getInt("codigo"));
         contrato.setObjeto(rs.getString("objeto"));
@@ -150,8 +149,6 @@ public class ContratoDAO {
         contrato.setAtivo(rs.getBoolean("ativo"));
         contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
             
-            
-        }
 
         return contrato;
     }

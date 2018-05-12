@@ -162,15 +162,14 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
 
         Usuario usuario = new Usuario();
         
-        while(rs.next()){
-            
         usuario.setMatricula(rs.getInt("matricula"));
         usuario.setNome(rs.getString("nome"));
         usuario.setDepartamento(rs.getString("departamento"));
         usuario.setLogin(rs.getString("login"));
         usuario.setPassword(rs.getString("password"));
+        usuario.setDataAdmissao(rs.getDate("dataAdmissao"));
             
-        }
+        
     //NÃO POSSO FECHAR O RESULTSET AQUI    
         return usuario;
     }

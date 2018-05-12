@@ -34,7 +34,7 @@
                 <th>Editar</th>
                 <th>Deletar</th>
             </tr>
-            <c:forEach items="${controll.servletContext.getAttribute("listaUsuarios")}" var="usuario" >
+            <c:forEach items="${listaUsuarios}" var="usuario" >
                 <tr>
                     <td>${usuario.nome}</td>
                     <td>${usuario.matricula}</td>
