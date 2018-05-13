@@ -46,15 +46,12 @@ public class EditarContratoServletController extends HttpServlet {
             throws ServletException, IOException {
         
     Connection conn = ConexaoServletController.getConexaoGuardada(request);
-      
         
         //NECESSÁRIO FAZER O PARSER DO PARÂMETRO
         String codigoStrg = (String) request.getParameter("codigo");
         int codigo = 0;
         codigo = Integer.parseInt(codigoStrg);
- 
         Contrato contrato = null;
- 
         String errorString = null;
  
         try {

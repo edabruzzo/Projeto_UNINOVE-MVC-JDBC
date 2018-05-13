@@ -49,6 +49,7 @@ public class ContratoDAO {
         fabrica.executaQuerieUpdate(conn, sql1);
     }
 
+
     public void removerContrato(Connection conn, int codigo) throws SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM tb_contrato WHERE codigo = "
@@ -60,10 +61,10 @@ public class ContratoDAO {
     public List<Contrato> consultaContratos(Connection conn) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato;";
-
+    
         ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
 
-        return this.extrairListaContratosResultSet(rs);
+        return extraiListaContratos(rs);
 
     }
 
@@ -73,10 +74,8 @@ public class ContratoDAO {
                 + codigo + " ORDER BY orcamentoComprometido DESC;";
 
         ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
-        Contrato contrato = this.extraiContratoResultSet(rs);
-        rs.close();
 
-        return contrato;
+        return this.extraiContratoResultSet(rs);
 
     }
 
@@ -85,9 +84,11 @@ public class ContratoDAO {
         String sql = "SELECT * FROM tb_contrato WHERE objeto LIKE '"
                 + objeto + "';";
 
-        ResultSet  rs = fabrica.executaQuerieResultSet(conn, sql);
-        return this.extrairListaContratosResultSet(rs);
+        
+        ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
 
+        return extraiListaContratos(rs);
+        
     }
 
     public Contrato findByCodigo(Connection conn, Integer codigo) throws ClassNotFoundException, SQLException {
@@ -113,18 +114,21 @@ public class ContratoDAO {
         String sql = "SELECT * FROM tb_contrato WHERE ativo IS TRUE;";
 
         ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
-        return this.extrairListaContratosResultSet(rs);
+
+        return this.extraiListaContratos(rs);
 
     }
 
+    
     public List<Contrato> findInativos(Connection conn) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM tb_contrato WHERE ativo IS FALSE;";
 
         ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
-        return this.extrairListaContratosResultSet(rs);
-
+        
+        return this.extraiListaContratos(rs);
     }
+    
 
     public List<Contrato> findByContratado(Connection conn, String contratado) throws ClassNotFoundException, SQLException {
 
@@ -132,8 +136,8 @@ public class ContratoDAO {
                 + contratado + "';";
 
         ResultSet rs = fabrica.executaQuerieResultSet(conn, sql);
-        return this.extrairListaContratosResultSet(rs);
-
+        
+        return this.extraiListaContratos(rs);
     }
 
     
@@ -145,53 +149,45 @@ public class ContratoDAO {
         while(rs.next()){
             
         contrato.setCodigo(rs.getInt("codigo"));
-        contrato.setObjeto(rs.getString("objeto"));
+        contrato.setObjeto(rs.getString("objetoContrato"));
         contrato.setContratado(rs.getString("contratado"));
         contrato.setAtivo(rs.getBoolean("ativo"));
         contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
             
             
         }    
-            
-
-        return contrato;
-    }
-
-    
-    
-    
-    
         
-    public Contrato extraiContratoResultSetParaLista(ResultSet rs) throws SQLException, ClassNotFoundException {
-
-        Contrato contrato = new Contrato();
-           
-        contrato.setCodigo(rs.getInt("codigo"));
-        contrato.setObjeto(rs.getString("objeto"));
-        contrato.setContratado(rs.getString("contratado"));
-        contrato.setAtivo(rs.getBoolean("ativo"));
-        contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
-            
+        rs.close();
 
         return contrato;
     }
 
-    
-    
-    
-    
-    
-    public List<Contrato> extrairListaContratosResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+    private List<Contrato> extraiListaContratos(ResultSet rs) throws SQLException {
 
         List<Contrato> listaContratos = new ArrayList();
 
         while (rs.next()) {
-            listaContratos.add(this.extraiContratoResultSetParaLista(rs));
+           
+        Contrato contrato = new Contrato();
+           
+        contrato.setCodigo(rs.getInt("codigo"));
+        contrato.setObjeto(rs.getString("objetoContrato"));
+        contrato.setContratado(rs.getString("contratado"));
+        contrato.setAtivo(rs.getBoolean("ativo"));
+        contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
+           
+        listaContratos.add(contrato);
+                        
         }
+        
         rs.close();
 
         return listaContratos;
+        
 
     }
+    
 
-}
+    
+}    
+    
