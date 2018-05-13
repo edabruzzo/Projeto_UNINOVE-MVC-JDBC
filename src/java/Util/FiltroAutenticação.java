@@ -42,8 +42,8 @@ public class FiltroAutenticação implements Filter {
             throws IOException, ServletException {
         if (debug) {
             log("Autenticação:DoBeforeProcessing");
-             HttpServletRequest httpRequest = (HttpServletRequest) request;
-             
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+
             System.out.println("FILTRO AUTENTICAÇÃO  - verificando se há usuário logado na sessão "
                     + " para o seguinte servlet: " + httpRequest.getServletPath());
 
@@ -119,42 +119,53 @@ public class FiltroAutenticação implements Filter {
         HttpSession session = httpRequest.getSession();
         Usuario usuarioLogado = ConexaoServletController.getUsuarioLogado(session);
 
-        if (usuarioLogado == null && !httpRequest.getServletPath().contains("/login")) {
-            //       httpResponse.sendRedirect(httpRequest.getContextPath() + "/jdbcDependente/login");
-             System.out.println("FILTRO AUTENTICAÇÃO  - NÃO há usuário logado na sessão "
-                    + " para o seguinte servlet: " + httpRequest.getServletPath());
-            RequestDispatcher dispatcher //
-                    = request.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
-            dispatcher.forward(request, response);
+        if (!httpRequest.getServletPath().contains("/login")) {
+
+            try {
+                String nomeUsuarioLogado = usuarioLogado.getNome();
+                Throwable problem = null;
+                try {
+
+                    chain.doFilter(request, response);
+                } catch (Throwable t) {
+                    // If an exception is thrown somewhere down the filter chain,
+                    // we still want to execute our after processing, and then
+                    // rethrow the problem after that.
+                    problem = t;
+                    t.printStackTrace();
+                }
+
+                doAfterProcessing(request, response);
+
+                // If there was a problem, we want to rethrow it if it is
+                // a known type, otherwise log it.
+                if (problem != null) {
+                    if (problem instanceof ServletException) {
+                        throw (ServletException) problem;
+                    }
+                    if (problem instanceof IOException) {
+                        throw (IOException) problem;
+                    }
+                    sendProcessingError(problem, response);
+                }
+
+            } catch (NullPointerException npe) {
+
+                //       httpResponse.sendRedirect(httpRequest.getContextPath() + "/jdbcDependente/login");
+                System.out.println("FILTRO AUTENTICAÇÃO  - NÃO há usuário logado na sessão "
+                        + " para o seguinte servlet: " + httpRequest.getServletPath());
+                RequestDispatcher dispatcher //
+                        = request.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
+                dispatcher.forward(request, response);
+
+            }
 
         } else {
 
-            Throwable problem = null;
-            try {
+            chain.doFilter(request, response);
 
-                chain.doFilter(request, response);
-            } catch (Throwable t) {
-                // If an exception is thrown somewhere down the filter chain,
-                // we still want to execute our after processing, and then
-                // rethrow the problem after that.
-                problem = t;
-                t.printStackTrace();
-            }
-
-            doAfterProcessing(request, response);
-
-            // If there was a problem, we want to rethrow it if it is
-            // a known type, otherwise log it.
-            if (problem != null) {
-                if (problem instanceof ServletException) {
-                    throw (ServletException) problem;
-                }
-                if (problem instanceof IOException) {
-                    throw (IOException) problem;
-                }
-                sendProcessingError(problem, response);
-            }
         }
+
     }
 
     /**

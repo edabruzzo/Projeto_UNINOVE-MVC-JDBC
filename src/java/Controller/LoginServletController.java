@@ -98,7 +98,7 @@ public class LoginServletController extends HttpServlet {
             } // If no error
             // Store usuario information in Session
             // And redirect to usuarioInfo page.
-            if (hasError == false && usuario != null) {
+            if (hasError == false && usuario.getNome() != null) {
 
                 HttpSession session = request.getSession();
                 ConexaoServletController.guardarUsuarioLogado(session, usuario);
@@ -110,6 +110,10 @@ public class LoginServletController extends HttpServlet {
 
         response.sendRedirect(request.getServletPath().replace("/jdbcDependente/login", "/ProjetoUninoveMVC-JDBC/jdbcDependente/contratos"));
 
+            }else if (usuario.getNome()==null){
+                
+          ConexaoServletController.guardarUsuarioLogado(request.getSession(), null);
+                
             }
 
         }
