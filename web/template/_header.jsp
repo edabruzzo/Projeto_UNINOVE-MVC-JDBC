@@ -15,7 +15,6 @@
   </div>
    <div style="float: right; padding: 10px; text-align: right;">
       <!-- User store in session with attribute: loginedUser -->
-     Usuário logado : <b>${usuarioLogado.getNome}</b>
      Data e hora : <b><%
          java.util.Date dNow = new java.util.Date( );
          SimpleDateFormat ft = 

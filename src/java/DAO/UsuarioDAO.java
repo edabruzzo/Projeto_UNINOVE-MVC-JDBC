@@ -158,7 +158,7 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
     }
 
 
-    public Usuario extraiUsuarioResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+    public Usuario extraiUsuarioResultSetParaLista(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         Usuario usuario = new Usuario();
         
@@ -174,12 +174,38 @@ OperacoesBancoDados fabrica = new OperacoesBancoDados();
         return usuario;
     }
 
+    
+    
+    
+        public Usuario extraiUsuarioResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+
+        Usuario usuario = new Usuario();
+        
+        while(rs.next()){
+            
+        usuario.setMatricula(rs.getInt("matricula"));
+        usuario.setNome(rs.getString("nome"));
+        usuario.setDepartamento(rs.getString("departamento"));
+        usuario.setLogin(rs.getString("login"));
+        usuario.setPassword(rs.getString("password"));
+        usuario.setDataAdmissao(rs.getDate("dataAdmissao"));
+            
+            
+        }
+        
+    //NÃO POSSO FECHAR O RESULTSET AQUI    
+        return usuario;
+    }
+
+    
+    
+    
     public List<Usuario> extrairListaUsuariosResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         List<Usuario> listaUsuarios = new ArrayList();
 
         while (rs.next()) {
-            listaUsuarios.add(this.extraiUsuarioResultSet(rs));
+            listaUsuarios.add(this.extraiUsuarioResultSetParaLista(rs));
         }
         rs.close();//AQUI EU POSSO FECHAR O RESULTSET
 
