@@ -13,6 +13,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -21,6 +24,7 @@ import java.util.logging.Logger;
 public class OperacoesBancoDados {
 
     private String URL;
+
 
     public void criaInfraestrutura() throws SQLException, ClassNotFoundException {
 
@@ -46,11 +50,31 @@ public class OperacoesBancoDados {
 
         listaSQLs.add(sql3);
 
-        String sql4 = "INSERT INTO tb_usuario (nome, departamento, dataAdmissao, "
+
+        String sql4 = "INSERT INTO tb_contrato(objetoContrato, orcamentoComprometido, "
+                + "ATIVO, contratado) "
+                + "VALUES('Limpeza', 50000, true, 'Organizações Tabajara Ltda.');";
+
+        listaSQLs.add(sql4);
+
+
+        String sql5 = "INSERT INTO tb_contrato(objetoContrato, orcamentoComprometido, "
+                + "ATIVO, contratado) "
+                + "VALUES('Segurança', 200000, true, 'Organizações Tabajara Ltda.');";
+
+        listaSQLs.add(sql5);
+
+        String sql6 = "INSERT INTO tb_usuario (nome, departamento, dataAdmissao, "
                 + "login, password) "
                 + "VALUES ('Fulano', 'Operações Especiais', '2018-01-01', 'fulano', '123')";
-        listaSQLs.add(sql4);
+        listaSQLs.add(sql6);
+
         
+        String sql7 = "INSERT INTO tb_usuario (nome, departamento, dataAdmissao, "
+                + "login, password) "
+                + "VALUES ('Sicrano', 'Operações Especiais', '2018-01-01', 'sicrano', '123')";
+        listaSQLs.add(sql7);
+
         
 
         executaBatchUpdate(this.criaConexao(), listaSQLs);
@@ -87,27 +111,32 @@ public class OperacoesBancoDados {
 
     }
 
-    public Connection criaConexao() throws ClassNotFoundException {
+    public Connection criaConexao()  {
 
-        Class.forName("com.mysql.jdbc.Driver");
-        String USER = "root";
-        String PASSWORD = "root";
-        this.setURL("jdbc:mysql://localhost:3306/controleFinanceiroUNINOVE");
-
-        Connection conn = null;
-        //STEP 3: Open a connection
-        System.out.println("Conectando ao servidor com a seguinte URL : " + URL);
-
+        System.out.println("Criando a conexao com o banco de dados ...");
+        InitialContext  contextoInicial = null;
         try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("CONEXÃO CRIADA COM SUCESSO!");
-        } catch (SQLException ex) {
-
-            System.out.println("CONEXÃO NÃO ESTABELECIDA");
-
+            contextoInicial = new InitialContext();
+        } catch (NamingException ex) {
             Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        Object lookup = null;
+        try {
+            lookup = contextoInicial.lookup("java:app/jdbc/projetoUNINOVE");
+        } catch (NamingException ex) {
+            Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DataSource dataSource = (DataSource) lookup;
+        
+        Connection conn = null;
+        try {
+       conn = dataSource.getConnection();
+       System.out.println("CONEXÃO CRIADA COM SUCESSO!");
+    
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return conn;
 
     }
@@ -273,9 +302,7 @@ public class OperacoesBancoDados {
 
             fecharConexao(conn);
             stmt.close();
-
-        }
-
-
+            
+           }
     }
 }

@@ -81,8 +81,6 @@ public class FiltroJDBC implements Filter {
  
             } catch (SQLException ex) {
             Logger.getLogger(FiltroJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FiltroJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
                 
                 System.out.println("FILTRO-JDBC - Fechando conexão com banco de dados");

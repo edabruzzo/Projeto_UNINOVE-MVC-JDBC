@@ -29,7 +29,7 @@
             </tr>
             <tr>
                <td>Password</td>
-               <td><input type="secret" name="password" value= "${usuario.password}" /> </td>
+               <td><input type="password" name="password" value= "${usuario.password}" /> </td>
             </tr>
             <tr>
                <td colspan ="2">
@@ -40,8 +40,8 @@
          </table>
       </form>
  
-      <strong>Usuário pré-cadastrado: </strong>
-      <strong>LOGIN: fulano</strong>
+      <strong>Usuários pré-cadastrado: </strong>
+      <strong>LOGIN: 'fulano' ou 'sicrano'</strong>
       <strong>PASSWORD: 123</strong>
            
       <jsp:include page="/template/_footer.jsp"></jsp:include>

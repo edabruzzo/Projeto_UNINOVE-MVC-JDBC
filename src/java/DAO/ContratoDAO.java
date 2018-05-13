@@ -142,7 +142,30 @@ public class ContratoDAO {
 
         Contrato contrato = new Contrato();
         
+        while(rs.next()){
             
+        contrato.setCodigo(rs.getInt("codigo"));
+        contrato.setObjeto(rs.getString("objeto"));
+        contrato.setContratado(rs.getString("contratado"));
+        contrato.setAtivo(rs.getBoolean("ativo"));
+        contrato.setOrcamentoComprometido(rs.getDouble("orcamentoComprometido"));
+            
+            
+        }    
+            
+
+        return contrato;
+    }
+
+    
+    
+    
+    
+        
+    public Contrato extraiContratoResultSetParaLista(ResultSet rs) throws SQLException, ClassNotFoundException {
+
+        Contrato contrato = new Contrato();
+           
         contrato.setCodigo(rs.getInt("codigo"));
         contrato.setObjeto(rs.getString("objeto"));
         contrato.setContratado(rs.getString("contratado"));
@@ -153,12 +176,17 @@ public class ContratoDAO {
         return contrato;
     }
 
+    
+    
+    
+    
+    
     public List<Contrato> extrairListaContratosResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
 
         List<Contrato> listaContratos = new ArrayList();
 
         while (rs.next()) {
-            listaContratos.add(this.extraiContratoResultSet(rs));
+            listaContratos.add(this.extraiContratoResultSetParaLista(rs));
         }
         rs.close();
 
