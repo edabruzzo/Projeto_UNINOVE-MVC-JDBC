@@ -14,13 +14,10 @@
         <title>Home Page</title>
     </head>
     <body style="background-color: activeborder">
-
         <jsp:include page="/template/_header.jsp"></jsp:include>
         <jsp:include page="/template/_menu.jsp"></jsp:include>
-
             <strong>
                 <h3>Home Page</h3>
-
                 <br>PROJETO DESENVOLVIDO PARA A MATÉRIA PROGRAMAÇÃO ORIENTADA A OBJETOS.<br>
                 <b>Propósito do projeto:</b>
                 <ul>
@@ -32,33 +29,18 @@
                     <li>Remoção do Contrato</li>
                 </ul>
             </strong>
-
             <form method="POST" action="${pageContext.request.contextPath}/criaInfra">
-
-            <text>
-
-            <h3>    <p style="color:red">Se este for seu primeiro acesso :</p></h3>
-            <strong>
-                Você terá que criar toda a infraestrutura do sistema.
-
-                Certifique-se de haver uma instância do servidor MySQL de banco de dados
-
-                rodando em sua máquina. Para isso, abra o gerenciador de tarefas do seu 
-
-                sistema operacional ou verifique na linha de comando se o serviço MySQL 
-
-                foi iniciado. 
-
-                Inicie o serviço MYSQL e, após, clique no campo abaixo: 
-            </strong>
-            </text>
-
             <input type="submit" value="CRIAR INFRAESTRUTURA"/>
-
+            <strong><text>
+      Se este for seu primeiro acesso, você terá que criar toda a infraestrutura do sistema.
+      Certifique-se de haver uma instância do servidor MySQL de banco de dados
+      rodando em sua máquina. Para isso, abra o gerenciador de tarefas do seu 
+      sistema operacional ou verifique na linha de comando se o serviço MySQL 
+      foi iniciado. O botão criar infraestrutura irá criar o banco de dados de 
+      nome 'controlefinanceiroUNINOVE' com as tableas 'tb_usuario' e 'tb_contrato'.
+      Inicie o serviço MYSQL e, após, clique no botão 'CRIAR INFRAESTRUTURA'.
+            </text></strong>
         </form>
-
-
         <jsp:include page="/template/_footer.jsp"></jsp:include>
-
-    </body>
+ </body>
 </html>

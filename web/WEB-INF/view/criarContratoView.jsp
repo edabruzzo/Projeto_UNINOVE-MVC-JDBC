@@ -24,7 +24,7 @@
        
       <p style="color: red;">${errorString}</p>
        
-      <form method="POST" action="${pageContext.request.contextPath}//jdbcDependente/criarContrato">
+      <form method="POST" action="${pageContext.request.contextPath}/jdbcDependente/criarContrato">
          <table border="0">
             <tr>
                <td>Código do Contrato</td>
@@ -37,6 +37,13 @@
             <tr>
                <td>Orçamento comprometido</td>
                <td><input type="text" name="orcamento" value="${contrato.orcamento}" /></td>
+            </tr>
+            
+            <tr>
+               <td>Ativo ?</td>
+               <td><input type="radio" name="ativo" value="S" />SIM</td>
+               <td><input type="radio" name="ativo" value="N" />NÃO</td>
+
             </tr>
             <tr>
                <td colspan="2">                   

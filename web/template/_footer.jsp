@@ -7,10 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
   
-<div style="background: darkgray; text-align: center; padding: 5px; margin-top: 10px;">
-  
-    <h3>@Copyright Trabalho feito pelos alunos EDWIN, EMMANUEL e WELINGTON para a 
-  
-  disciplina Programação Orientada a Objetos - Prof. GERSON RISSO
+<div style="background: darkgray; text-align: left; padding: 0.5px; margin-top: 1px;">
+   <h3>Trabalho elaborado pelos alunos <strong style="color:red">Edwin, Emmanuel e Welington</strong> para a 
+        disciplina Programação Orientada a Objetos - <strong style="color:red">Prof. Gerson Risso </strong>
   </h3>
 </div>

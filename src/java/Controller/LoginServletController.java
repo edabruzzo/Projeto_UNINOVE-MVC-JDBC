@@ -87,15 +87,9 @@ public class LoginServletController extends HttpServlet {
 
                 hasError = true;
                 errorString = "Login ou password inválido!";
-
-                usuario = new Usuario();
-                usuario.setLogin(login);
-                usuario.setPassword(password);
-
-                // Store information in request attribute, before forward.
+                
                 request.setAttribute("errorString", errorString);
-                request.setAttribute("usuario", usuario);
-
+                 ConexaoServletController.guardarUsuarioLogado(request.getSession(), null);
                 // Forward to /WEB-INF/views/login.jsp
                 RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
@@ -113,9 +107,8 @@ public class LoginServletController extends HttpServlet {
         //  = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuariosInfoView.jsp");
                          
         //dispatcher  = this.getServletContext().getRequestDispatcher("/WEB-INF/view/usuarioTESTES.jsp");
-       
-        String servletPath = request.getServletPath();
-        response.sendRedirect(request.getServletPath().replace("/jdbcDependente/login", "/ProjetoUninoveMVC-JDBC/jdbcDependente/usuariosInfo"));
+
+        response.sendRedirect(request.getServletPath().replace("/jdbcDependente/login", "/ProjetoUninoveMVC-JDBC/jdbcDependente/contratos"));
 
             }
 

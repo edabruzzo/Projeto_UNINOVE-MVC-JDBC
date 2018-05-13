@@ -101,8 +101,8 @@ public class EditarContratoServletController extends HttpServlet {
         try{
             //NECESSÁRIO FAZER A CONVERSÃO DOS VALORES QUE VÊM DA TELA
             codigo = Integer.parseInt(code);
-            ativo = Boolean.parseBoolean(active);
             orcamentoComprometido = Double.parseDouble(orcamento);
+            if("S".equals(active))ativo = true;
             
         } catch (Exception e) {
             

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Emm
  */
  
-@WebServlet(urlPatterns = { "/jdbcDependente/criarContrato" }, loadOnStartup = 0)
+@WebServlet(urlPatterns = { "/jdbcDependente/criarContrato" })
 public class CriarContratoServletController extends HttpServlet {
     
 
@@ -68,8 +68,8 @@ public class CriarContratoServletController extends HttpServlet {
         try{
             //NECESSÁRIO FAZER A CONVERSÃO DOS VALORES QUE VÊM DA TELA
             codigo = Integer.parseInt(code);
-            ativo = Boolean.parseBoolean(active);
             orcamentoComprometido = Double.parseDouble(orcamento);
+            if("S".equals(active)) ativo = true;
             
         } catch (Exception e) {
             

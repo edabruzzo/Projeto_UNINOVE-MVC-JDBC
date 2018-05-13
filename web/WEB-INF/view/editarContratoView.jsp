@@ -44,9 +44,10 @@
                   <td><input type="text" name="contratado" value="${contrato.contratado}" /></td>
                </tr>
                 <tr>
-                  <td>Ativo ? (tentando pegar este atributo via input type="radio")</td>
-                  <input type="text" name="ativo" value="${contrato.ativo}" />
-                  </td>
+                 
+               <td>Ativo ?</td>
+               <td><input type="radio" name="ativo" value="Sim" /></td>
+               <td><input type="radio" name="ativo" value="Não" /></td>
                </tr>
                <tr>
                   <td colspan = "2">

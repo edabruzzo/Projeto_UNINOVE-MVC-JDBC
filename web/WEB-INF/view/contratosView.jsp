@@ -21,6 +21,9 @@
 
             <p style="color: red;">${errorString}</p>
 
+        
+        <a href="${pageContext.request.contextPath}/jdbcDependente/criarContrato">Criar Contrato</a>
+        
         <table border="1" cellpadding="5" cellspacing="1" >
             <tr>
                 <th>Código</th>
@@ -31,6 +34,7 @@
                 <th>Editar</th>
                 <th>Deletar</th>
             </tr>
+
             <c:forEach items="${listaContratos}" var="contrato" >
                 <tr>
                     <td>${contrato.codigo}</td>
@@ -39,16 +43,15 @@
                     <td>${contrato.contratado}</td>
                     <td>${contrato.ativo}</td>
                     <td>
-                        <a href="/jdbcDependente/editarContrato?code=${contrato.codigo}">Editar</a>
+                        <a href="${pageContext.request.contextPath}/jdbcDependente/editarContrato?codigo=${contrato.codigo}">Editar</a>
                     </td>
                     <td>
-                        <a href="/jdbcDependente/deletarContrato?code=${contrato.codigo}">Deletar</a>
+                        <a href="${pageContext.request.contextPath}/jdbcDependente/deletarContrato?codigo=${contrato.codigo}">Deletar</a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <a href="/jdbcDependente/criarContrato" >Criar Contrato</a>
 
         <jsp:include page="/template/_footer.jsp"></jsp:include>
 

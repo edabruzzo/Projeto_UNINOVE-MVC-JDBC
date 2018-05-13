@@ -12,24 +12,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 
-<div style="background: darkgray; height: 90px; padding: 5px;">
+<div style="background: darkgray; height: 100px; padding: 5px;">
   <div style="float: left">
-     <h1>SISTEMA CONTROLE CONTRATOS</h1>
+    <h1>SISTEMA CONTROLE CONTRATOS</h1>
+    <h3 style="color:red">USUARIO LOGADO: ${usuarioLogado.nome}</h3>
+  
   </div>
-   <div style="float: right; padding: 10px; text-align: right;">
+   <div style="float: right; padding: 10px; text-align: center;">
       <!-- User store in session with attribute: loginedUser -->
-
-      <p>  Usuario logado:  <%Usuario usuarioLogado = (Usuario) request.getAttribute("usuarioLogado");
-                              out.println("<h5>"+usuarioLogado.getNome()+"</h5>");%>    </p>
-      
-      <p>Data e hora : <%
+   <p> <h4>Data e hora : <%
          java.util.Date dNow = new java.util.Date( );
          SimpleDateFormat ft = 
-         new SimpleDateFormat ("E dd/MM/yyyy 'às' hh:mm:ss k zzz");
+         new SimpleDateFormat ("E dd/MM/yyyy 'às' hh:mm:ss k");
          //https://www.tutorialspoint.com/jsp/jsp_handling_date.htm
-         out.print( "<h5 align=\"center\">" + ft.format(dNow) + "</h5>");
-      %> </p>
-   <br/>
+         out.print(ft.format(dNow));
+      %></p></h4>
      
  
   </div>
