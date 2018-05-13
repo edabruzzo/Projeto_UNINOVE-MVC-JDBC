@@ -4,6 +4,7 @@
     Author     : Emm
 --%>
 
+<%@page import="Model.Usuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
@@ -17,13 +18,17 @@
   </div>
    <div style="float: right; padding: 10px; text-align: right;">
       <!-- User store in session with attribute: loginedUser -->
-     Data e hora : <b><%
+
+      <p>  Usuario logado:  <%Usuario usuarioLogado = (Usuario) request.getAttribute("usuarioLogado");
+                              out.println("<h5>"+usuarioLogado.getNome()+"</h5>");%>    </p>
+      
+      <p>Data e hora : <%
          java.util.Date dNow = new java.util.Date( );
          SimpleDateFormat ft = 
          new SimpleDateFormat ("E dd/MM/yyyy 'às' hh:mm:ss k zzz");
          //https://www.tutorialspoint.com/jsp/jsp_handling_date.htm
-         out.print( "<h4 align=\"center\">" + ft.format(dNow) + "</h4>");
-      %></b>
+         out.print( "<h5 align=\"center\">" + ft.format(dNow) + "</h5>");
+      %> </p>
    <br/>
      
  

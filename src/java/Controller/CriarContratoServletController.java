@@ -56,12 +56,11 @@ public class CriarContratoServletController extends HttpServlet {
 
         Connection conn = ConexaoServletController.getConexaoGuardada(request);
 
-        
         String code = (String) request.getParameter("codigo");
-        String objetoContrato = (String) request.getParameter("objeto");
+        String objetoContrato = (String) request.getParameter("objetoContrato");
         String contratado = (String) request.getParameter("contratado");
         String active = (String) request.getParameter("ativo");
-        String orcamento = (String) request.getParameter("price");
+        String orcamento = (String) request.getParameter("orcamentoCompromentido");
        
         int codigo = 0;
         double orcamentoComprometido = 0;
