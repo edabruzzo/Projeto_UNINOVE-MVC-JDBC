@@ -46,8 +46,8 @@
                 <tr>
                  
                <td>Ativo ?</td>
-               <td><input type="radio" name="ativo" value="Sim" /></td>
-               <td><input type="radio" name="ativo" value="Não" /></td>
+               <td><input type="radio" name="ativo" value="S" />SIM</td>
+               <td><input type="radio" name="ativo" value="N" />NÃO</td>
                </tr>
                <tr>
                   <td colspan = "2">

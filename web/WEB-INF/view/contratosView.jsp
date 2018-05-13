@@ -18,11 +18,9 @@
         <jsp:include page="/template/_menu.jsp"></jsp:include>
 
             <h3>LISTA CONTRATOS</h3>
-
+        <h4><a href="${pageContext.request.contextPath}/jdbcDependente/criarContrato">Criar Contrato</a></h4>
             <p style="color: red;">${errorString}</p>
 
-        
-        <a href="${pageContext.request.contextPath}/jdbcDependente/criarContrato">Criar Contrato</a>
         
         <table border="1" cellpadding="5" cellspacing="1" >
             <tr>

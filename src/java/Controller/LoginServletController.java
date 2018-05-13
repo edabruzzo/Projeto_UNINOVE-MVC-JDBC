@@ -113,6 +113,9 @@ public class LoginServletController extends HttpServlet {
             }else if (usuario.getNome()==null){
                 
           ConexaoServletController.guardarUsuarioLogado(request.getSession(), null);
+                RequestDispatcher dispatcher //
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/view/loginView.jsp");
+                dispatcher.forward(request, response);
                 
             }
 

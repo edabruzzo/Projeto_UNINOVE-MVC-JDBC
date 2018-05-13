@@ -27,16 +27,16 @@
       <form method="POST" action="${pageContext.request.contextPath}/jdbcDependente/criarContrato">
          <table border="0">
             <tr>
-               <td>Código do Contrato</td>
-               <td><input type="text" name="codigo" value="${contrato.codigo}" /></td>
-            </tr>
-            <tr>
                <td>Objeto do contrato</td>
-               <td><input type="text" name="objeto" value="${contrato.objeto}" /></td>
+               <td><input type="text" name="objetoContrato" value="${contrato.objeto}" /></td>
+            </tr>
+             <tr>
+               <td>Empresa/profissional contratado</td>
+               <td><input type="text" name="contratado" value="${contrato.contratado}" /></td>
             </tr>
             <tr>
                <td>Orçamento comprometido</td>
-               <td><input type="text" name="orcamento" value="${contrato.orcamento}" /></td>
+               <td><input type="text" name="orcamentoComprometido" value="${contrato.orcamentoComprometido}" /></td>
             </tr>
             
             <tr>

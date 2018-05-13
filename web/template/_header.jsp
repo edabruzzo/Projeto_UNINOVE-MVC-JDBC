@@ -23,7 +23,7 @@
    <p> <h4>Data e hora : <%
          java.util.Date dNow = new java.util.Date( );
          SimpleDateFormat ft = 
-         new SimpleDateFormat ("E dd/MM/yyyy 'às' hh:mm:ss k");
+         new SimpleDateFormat ("E dd/MM/yyyy 'às' k:mm:ss");
          //https://www.tutorialspoint.com/jsp/jsp_handling_date.htm
          out.print(ft.format(dNow));
       %></p></h4>

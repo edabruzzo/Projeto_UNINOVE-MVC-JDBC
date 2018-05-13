@@ -89,11 +89,11 @@ public class EditarContratoServletController extends HttpServlet {
         
        Connection conn = ConexaoServletController.getConexaoGuardada(request);
 
-       String code = (String) request.getParameter("codigo");
-        String objetoContrato = (String) request.getParameter("objetoContrato");
+        String code = (String) request.getParameter("codigo");
+        String objetoContrato = (String) request.getParameter("objeto");
         String contratado = (String) request.getParameter("contratado");
         String active = (String) request.getParameter("ativo");
-        String orcamento = (String) request.getParameter("orcamentoCompromentido");
+        String orcamento = (String) request.getParameter("orcamento");
        
         int codigo = 0;
         double orcamentoComprometido = 0;
@@ -102,6 +102,7 @@ public class EditarContratoServletController extends HttpServlet {
             //NECESSÁRIO FAZER A CONVERSÃO DOS VALORES QUE VÊM DA TELA
             codigo = Integer.parseInt(code);
             orcamentoComprometido = Double.parseDouble(orcamento);
+            
             if("S".equals(active))ativo = true;
             
         } catch (Exception e) {

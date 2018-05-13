@@ -56,34 +56,29 @@ public class CriarContratoServletController extends HttpServlet {
 
         Connection conn = ConexaoServletController.getConexaoGuardada(request);
 
-        String code = (String) request.getParameter("codigo");
         String objetoContrato = (String) request.getParameter("objetoContrato");
         String contratado = (String) request.getParameter("contratado");
         String active = (String) request.getParameter("ativo");
-        String orcamento = (String) request.getParameter("orcamentoCompromentido");
+        String orcamento = (String) request.getParameter("orcamentoComprometido");
        
         int codigo = 0;
         double orcamentoComprometido = 0;
         boolean ativo = false;
+        String errorString = null;
         try{
             //NECESSÁRIO FAZER A CONVERSÃO DOS VALORES QUE VÊM DA TELA
-            codigo = Integer.parseInt(code);
             orcamentoComprometido = Double.parseDouble(orcamento);
+
             if("S".equals(active)) ativo = true;
             
         } catch (Exception e) {
-            
+         
+            errorString = "Não foi possível ler os dados passados!";
             System.out.println("Não foi possível fazer o parser dos valores que vieram no request");
             
         }
 
 Contrato contrato = new Contrato(codigo, objetoContrato, orcamentoComprometido, ativo, contratado);
- 
-        String errorString = null;
-        
-        if (code == null) {
-            errorString = "Contrato com código inválido!";
-        }
  
         if (errorString == null) {
             try {
