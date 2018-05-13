@@ -122,7 +122,16 @@ public class OperacoesBancoDados {
         }
         Object lookup = null;
         try {
-            lookup = contextoInicial.lookup("java:app/jdbc/projetoUNINOVE");
+            /*
+            
+            ATENÇÃO:
+            
+            SE FOR TOMCAT TEM QUE ACRESCENTAR java:env ou java:comp/env/jdbc/nomeDoDatasource
+            
+            NO GLASSFISH É "java:app/jdbc/nomeDoDataSource", mas parece que não precisa acrescentar java:app
+            */
+            
+            lookup = contextoInicial.lookup("java:comp/env/jdbc/projetoUNINOVE");
         } catch (NamingException ex) {
             Logger.getLogger(OperacoesBancoDados.class.getName()).log(Level.SEVERE, null, ex);
         }

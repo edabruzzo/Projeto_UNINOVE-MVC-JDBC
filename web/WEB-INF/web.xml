@@ -77,7 +77,7 @@ diretamente nas páginas. Outra forma de fazer a mesma coisa é por meio da decl
         </jsp-property-group>
     </jsp-config>-->
        <resource-ref>
-        <res-ref-name>/jdbc/projetoUNINOVE</res-ref-name>
+        <res-ref-name>jdbc/projetoUNINOVE</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
